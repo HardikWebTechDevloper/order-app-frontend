@@ -1,0 +1,77 @@
+<div [ngClass]="{
+  'vb__layout__grayBackground': settings.isGrayBackground
+}">
+  <nz-layout [ngClass]="{
+  'vb__layout': true,
+  'vb__layout__contentMaxWidth': settings.isContentMaxWidth,
+  'vb__layout__appMaxWidth': settings.isAppMaxWidth,
+  'vb__layout__squaredBorders': settings.isSquaredBorders,
+  'vb__layout__cardsShadow': settings.isCardShadow,
+  'vb__layout__borderless': settings.isBorderless
+}">
+
+    <vb-variants></vb-variants>
+    <vb-sidebar></vb-sidebar>
+    <vb-support-chat></vb-support-chat>
+
+    <!-- classic left menu -->
+    <nz-sider *ngIf="settings.layoutMenu === 'classic' && settings.menuLayoutType === 'left' && !settings.isMobileView"
+      [nzWidth]="settings.isMenuCollapsed ? 80 : settings.leftMenuWidth" style="transition: none !important">
+      <vb-menu-classic-left></vb-menu-classic-left>
+    </nz-sider>
+    <div *ngIf="settings.layoutMenu === 'classic' && settings.isMobileView">
+      <div class="handler" (click)="toggleMobileMenu()">
+        <div class="handlerIcon"></div>
+      </div>
+      <nz-drawer [nzClosable]="false" [nzWrapClassName]="'mobileMenu'" [nzVisible]="isMobileMenuOpen" nzPlacement="left"
+        (nzOnClose)="toggleMobileMenu()">
+        <vb-menu-classic-left></vb-menu-classic-left>
+      </nz-drawer>
+    </div>
+    <div *ngIf="settings.layoutMenu === 'classic' && settings.menuLayoutType === 'top' && !settings.isMobileView">
+      <vb-menu-classic-top></vb-menu-classic-top>
+    </div>
+
+    <!-- flyout left menu -->
+    <nz-sider *ngIf="settings.layoutMenu === 'flyout' && settings.menuLayoutType === 'left'" [nzWidth]="'auto'">
+      <vb-menu-flyout-left></vb-menu-flyout-left>
+    </nz-sider>
+    <vb-menu-flyout-top *ngIf="settings.layoutMenu === 'flyout' && settings.menuLayoutType === 'top'">
+    </vb-menu-flyout-top>
+
+    <!-- simply menu -->
+    <vb-menu-simply *ngIf="settings.layoutMenu === 'simply'"></vb-menu-simply>
+
+    <nz-layout>
+      <nz-header *ngIf="settings.layoutTopbar === 'v1'" [ngClass]="{
+        'vb__layout__header': true,
+        'vb__layout__fixedHeader': settings.isTopbarFixed,
+        'vb__layout__headerGray': settings.isGrayTopbar,
+        'vb__layout__separatedHeader': settings.isTopbarSeparated
+      }">
+        <vb-topbar></vb-topbar>
+      </nz-header>
+      <vb-breadcrumbs *ngIf="settings.layoutBreadcrumbs === 'v1'"></vb-breadcrumbs>
+      <vb-breadcrumbs-2 *ngIf="settings.layoutBreadcrumbs === 'v2'"></vb-breadcrumbs-2>
+      <nz-content class="vb__layout__content">
+        <div [@slideFadeinUp]="routeAnimation(outlet, 'slideFadeinUp')"
+          [@slideFadeinRight]="routeAnimation(outlet, 'slideFadeinRight')"
+          [@zoomFadein]="routeAnimation(outlet, 'zoomFadein')" [@fadein]="routeAnimation(outlet, 'fadein')">
+          <router-outlet #outlet="outlet"></router-outlet>
+        </div>
+      </nz-content>
+      <nz-footer *ngIf="settings.layoutFooter === 'v1'">
+        <vb-footer></vb-footer>
+      </nz-footer>
+      <nz-footer *ngIf="settings.layoutFooter === 'v2'">
+        <vb-footer-2></vb-footer-2>
+      </nz-footer>
+      <nz-footer *ngIf="settings.layoutFooter === 'v3'">
+        <vb-footer-3></vb-footer-3>
+      </nz-footer>
+      <nz-footer *ngIf="settings.layoutFooter === 'v4'">
+        <vb-footer-4></vb-footer-4>
+      </nz-footer>
+    </nz-layout>
+  </nz-layout>
+</div>

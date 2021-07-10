@@ -1,0 +1,200 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "visualbuilder": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "allowedCommonJsDependencies": [
+              "lodash",
+              "@firebase/database",
+              "angular2-chartjs",
+              "@ant-design/colors",
+              "@ant-design/icons-angular",
+              "@ant-design/icons-angular/icons"
+            ],
+            "aot": true,
+            "outputPath": "dist",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.app.json",
+            "assets": [
+              "src/favicon.png",
+              {
+                "glob": "**/*",
+                "input": "src/assets/",
+                "ignore": [
+                  "**/styles/**/*"
+                ],
+                "output": "/assets/"
+              }
+            ],
+            "styles": [
+              "./node_modules/ng-zorro-antd/style/entry.less",
+              "src/app/@vb/css/vendors/antd/themes/default.less",
+              "src/app/@vb/css/vendors/antd/themes/dark.less",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/chartist/dist/chartist.css",
+              "./node_modules/c3/c3.min.css",
+              "./node_modules/quill/dist/quill.core.css",
+              "./node_modules/quill/dist/quill.snow.css",
+              "src/app/@vb/css/vendors/antd/style.scss",
+              "src/app/@vb/css/vendors/bootstrap/style.scss",
+              "src/app/@vb/css/vendors/nprogress/style.scss",
+              "src/app/@vb/css/vendors/chartist/style.scss",
+              "src/app/@vb/css/vendors/chartist-tooltip-plugin/style.scss",
+              "src/app/@vb/css/vendors/perfect-scrollbar/style.scss",
+              "src/app/@vb/css/vendors/nestable/style.scss",
+              "src/app/@vb/css/vendors/quill/style.scss",
+              "src/app/@vb/css/core.scss",
+              "src/app/@vb/css/measurements.scss",
+              "src/app/@vb/css/colors.scss",
+              "src/app/@vb/css/utils.scss",
+              "src/app/@vb/css/layout.scss",
+              "src/app/@vb/css/extra/clean.scss",
+              "src/app/@vb/css/extra/air.scss"
+            ],
+            "scripts": [
+              "./node_modules/c3/c3.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "10mb"
+                }
+              ]
+            },
+            "hmr": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.hmr.ts"
+                }
+              ]
+            },
+            "demo": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.demo.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "visualbuilder:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "visualbuilder:build:production"
+            },
+            "hmr": {
+              "browserTarget": "visualbuilder:build:hmr",
+              "hmr": true
+            },
+            "demo": {
+              "browserTarget": "visualbuilder:build:demo"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "visualbuilder:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.spec.json",
+            "karmaConfig": "src/karma.conf.js",
+            "styles": [
+              "src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src/tsconfig.app.json",
+              "src/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "visualbuilder-e2e": {
+      "root": "e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "visualbuilder:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "visualbuilder:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "visualbuilder"
+}

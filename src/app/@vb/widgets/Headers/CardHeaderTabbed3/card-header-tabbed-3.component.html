@@ -1,0 +1,22 @@
+<div class="card-header-flex">
+  <div class="d-flex flex-column justify-content-center mr-auto">
+    <h5 class="mb-0">
+      <strong>{{ data.title }}</strong>
+    </h5>
+  </div>
+  <div class="d-inline-flex align-items-center">
+    <a href="javascript:;" class="nav-link dropdown-toggle pt-sm-0" nz-dropdown [nzDropdownMenu]="menu"
+      nzTrigger="click" nzPlacement="bottomRight">
+      Dropdown
+    </a>
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+      <ul nz-menu>
+        <li nz-menu-item><a href="javascript:;">Action</a></li>
+        <li nz-menu-item><a href="javascript:;">Another action</a></li>
+        <li nz-menu-item><a href="javascript:;">Something else here</a></li>
+        <li nz-menu-divider></li>
+        <li nz-menu-item><a href="javascript:;">Separated link</a></li>
+      </ul>
+    </nz-dropdown-menu>
+  </div>
+</div>

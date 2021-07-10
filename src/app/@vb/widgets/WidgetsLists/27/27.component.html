@@ -1,0 +1,13 @@
+<div>
+  <ngx-nestable [(list)]="current" [options]="options" [template]="itemTemplate" class="dd mb-4"></ngx-nestable>
+  <ng-template #itemTemplate let-row class="dd-item">
+    <div class="dd-handle dd3-handle" [ngxNestableDragHandle]="row"></div>
+    <button *ngIf="row.item.children &amp;&amp; row.item.children.length" [ngxNestableExpandCollapse]="row"
+      [ngClass]="['dd-item-toggle', row.item.expanded ? 'collapse' : 'expand']" type="button">
+      {{row.item.expanded ? 'Collapse' : 'Expand'}}&nbsp;
+    </button>
+    <div class="dd3-content">
+      <label nz-checkbox [(ngModel)]="row.item.checked">{{row.item.name}}</label>
+    </div>
+  </ng-template>
+</div>

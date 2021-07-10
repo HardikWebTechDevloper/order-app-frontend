@@ -1,0 +1,23 @@
+<form nz-form [nzLayout]="'inline'" [formGroup]="validateForm2" (ngSubmit)="submitForm2()">
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your coins amount!">
+      <nz-input-group nzAddOnBefore="$" nzAddOnAfter=".00">
+        <input nz-input formControlName="amount" placeholder="Coins Amount" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your pin!">
+      <nz-input-group nzAddOnBefore="*">
+        <input nz-input formControlName="pin" placeholder="8 Digit Pin" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <button type="submit" class="btn btn-success mt-1 mb-1">
+        Confirm Transaction
+      </button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

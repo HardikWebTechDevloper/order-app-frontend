@@ -1,0 +1,34 @@
+<div class="table-responsive text-nowrap">
+  <a href="javascript: void(0);" *ngIf="!orderHistoryLoaded" (click)="handleLoadOrderHistory()">
+    <nz-spin [nzSpinning]="orderHistoryLoading">
+      <nz-alert [nzType]="'info'" [nzDescription]="'Click to view open order details'">
+      </nz-alert>
+    </nz-spin>
+  </a>
+  <nz-table *ngIf="orderHistoryLoaded" #historyOrdersTable nzSize="small" [nzData]="myOpenOrdersData">
+    <thead>
+      <tr>
+        <th>Order Date</th>
+        <th>Open Date</th>
+        <th>Type</th>
+        <th>Bid/Ask</th>
+        <th>Filled</th>
+        <th>Units Total</th>
+        <th>Actual Rate</th>
+        <th>Est. Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of historyOrdersTable.data">
+        <td>{{item.orderDate}}</td>
+        <td>{{item.openDate}}</td>
+        <td [ngClass]="[item.type === 'SELL' ? 'text-danger' : 'text-success']">{{item.type}}</td>
+        <td>{{item.bidAsk}}</td>
+        <td>{{item.filled}}</td>
+        <td>{{item.unitsTotal}}</td>
+        <td>{{item.actualRate}}</td>
+        <td>{{item.estTotal}}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

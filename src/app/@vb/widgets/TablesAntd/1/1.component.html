@@ -1,0 +1,37 @@
+<div class="table-responsive text-nowrap">
+  <nz-table #mailTable [nzShowPagination]="false" [nzData]="listOfAllData"
+    (nzCurrentPageDataChange)="currentPageDataChange($event)">
+    <thead>
+      <tr>
+        <th nzShowCheckbox [(nzChecked)]="isAllDisplayDataChecked" [nzIndeterminate]="isIndeterminate"
+          (nzCheckedChange)="checkAll($event)"></th>
+        <th></th>
+        <th>From</th>
+        <th>Message</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of mailTable.data">
+        <td nzShowCheckbox [(nzChecked)]="mapOfCheckedId[data.id]" [nzDisabled]="data.disabled"
+          (nzCheckedChange)="refreshStatus()"></td>
+        <td>
+          <i [ngClass]="[data.favorites ? 'icmn-star-full text-warning' : 'icmn-star-full text-default']"></i>
+        </td>
+        <td>
+          <a href="javascript: void(0);">{{data.from}}</a>
+        </td>
+        <td>
+          {{data.message}}
+        </td>
+        <td>
+          <i *ngIf="data.attachments" class="icmn-attachment text-default"></i>
+        </td>
+        <td>
+          {{data.time}}
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

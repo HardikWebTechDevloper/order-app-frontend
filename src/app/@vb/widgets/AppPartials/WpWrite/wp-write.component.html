@@ -1,0 +1,53 @@
+<div>
+  <div class="d-flex align-items-center flex-wrap border-bottom mb-3 pb-3">
+    <div class="vb__utils__avatar vb__utils__avatar--size64 mr-3 mb-3 flex-shrink-0">
+      <img src="assets/images/avatars/5.jpg" alt="Mary Stanform" />
+    </div>
+    <div class="mb-3">
+      <div class="font-weight-bold font-size-16 text-dark">
+        Trinity Parson
+      </div>
+      <p class="font-italic">
+        “I hope you enjoy reading this as much as I enjoyed writing this.”
+      </p>
+      <a href="#" class="btn btn-sm btn-primary"> View Profile </a>
+    </div>
+  </div>
+  <h5 class="text-dark mb-4">Leave a comment</h5>
+  <form nz-form class="login-form">
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group [nzPrefix]="prefixUser">
+          <input nz-input placeholder="Your name">
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group [nzPrefix]="prefixMail">
+          <input nz-input placeholder="Your email">
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          <textarea rows="3" nz-input placeholder="Your message"></textarea>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <button nz-button nzType="primary" class="width-200 mr-4">
+        <i class="fa fa-send mr-2"></i>
+        Send
+      </button>
+      <nz-upload nzAction="https://jsonplaceholder.typicode.com/posts/">
+        <button nz-button>
+          <span>Attach File</span>
+        </button>
+      </nz-upload>
+    </nz-form-item>
+    <ng-template #prefixUser><i nz-icon type="user"></i></ng-template>
+    <ng-template #prefixMail><i nz-icon type="mail"></i></ng-template>
+  </form>
+</div>

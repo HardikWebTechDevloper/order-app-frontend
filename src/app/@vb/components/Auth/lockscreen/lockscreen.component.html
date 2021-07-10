@@ -1,0 +1,35 @@
+<div class="pt-5">
+  <div class="card boxContaine mt-2">
+    <div class="text-dark text-center font-size-32 mb-3">
+      Account Locked
+    </div>
+    <div class="text-center">
+      <div class="vb__utils__avatar vb__utils__avatar--size64 d-inline-block mb-2">
+        <img src="assets/images/avatars/2.jpg" alt="Mary Stanform" />
+      </div>
+      <div class="font-size-18 text-dark mb-4">
+        <strong>Mary Stanform</strong>
+      </div>
+    </div>
+    <form nz-form [nzLayout]="'vertical'">
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your Password!">
+          <input type="password" nz-input placeholder="Password" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <button nz-button nzType="primary" class="text-center w-100">
+            <strong>Unlock Account</strong>
+          </button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+    <div class="text-center pt-2 mb-auto">
+      <span class="mr-2">Already have an account?</span>
+      <a routerLink="/auth/login" class="vb__utils__link">
+        Sign in
+      </a>
+    </div>
+  </div>
+</div>

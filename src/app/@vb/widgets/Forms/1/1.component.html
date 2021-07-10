@@ -1,0 +1,27 @@
+<form nz-form [formGroup]="validateForm1" (ngSubmit)="submitForm1()">
+  <nz-form-item>
+    <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="full-name" class="text-left">Full Name</nz-form-label>
+    <nz-form-control [nzSm]="12" [nzXs]="24" nzErrorTip="Please input your full name!">
+      <input nz-input id="full-name" formControlName="fullName" placeholder="Your Fullname..." />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="email" class="text-left">Email Address</nz-form-label>
+    <nz-form-control [nzSm]="12" [nzXs]="24" nzErrorTip="Please input your email adress!">
+      <input nz-input id="email" formControlName="email" placeholder="Your Email Address..." />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="4" [nzXs]="24" class="text-left">Budget</nz-form-label>
+    <nz-form-control [nzSm]="12" [nzXs]="24">
+      <nz-slider [nzTooltipVisible]="'always'" formControlName="budget" [nzMarks]="marks"></nz-slider>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <button type="submit" class="btn btn-success px-5">
+        Send Data
+      </button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

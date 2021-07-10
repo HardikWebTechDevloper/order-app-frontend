@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="head">
+    <h4>Total: $2,436.00</h4>
+    <span>4 Items</span>
+  </div>
+  <div *ngFor="let item of data">
+    <a href="#" class="clearfix" class="item">
+      <div class="image">
+        <img src="/assets/images/products/{{item.img}}" />
+      </div>
+      <div class="info">
+        <div class="title">{{ item.title }}</div>
+        <div class="description">{{ item.description }}</div>
+        <div class="price">
+          <strong>{{ item.price }}</strong>
+          <sup *ngIf="item.oldPrice">
+            <strike>{{ item.oldPrice }}</strike>
+          </sup>
+          <span class="ml-1">x1</span>
+        </div>
+      </div>
+      <span class="close">
+        <i class="fe fe-x-circle"></i>
+      </span>
+    </a>
+  </div>
+  <div class="footer">
+    <button type="button" class="btn btn-primary text-center d-block width-100p">
+      <i class="fe fe-shopping-cart"></i>
+      Checkout
+    </button>
+  </div>
+</div>

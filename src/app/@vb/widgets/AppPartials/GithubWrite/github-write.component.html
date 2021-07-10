@@ -1,0 +1,24 @@
+<div>
+  <div class="d-flex align-items-start">
+    <a href="javascript: void(0);" class="vb__utils__avatar vb__utils__avatar--size50 mr-3 flex-shrink-0">
+      <img src="assets/images/avatars/4.jpg" alt="Mary Stanform" />
+    </a>
+    <div class="card card-skip flex-grow-1">
+      <nz-tabset class="vb-tabs-bordered mb-2" [nzSelectedIndex]="0">
+        <nz-tab nzTitle="Write"></nz-tab>
+        <nz-tab nzTitle="Preview"></nz-tab>
+      </nz-tabset>
+      <div class="editor">
+        <quill-editor style="height: 200px;"></quill-editor>
+      </div>
+      <div class="card-body border-top py-2 px-3">
+        <a href="javascript: void(0);" class="btn btn-success btn-with-addon text-nowrap ml-3 my-3">
+          <span class="btn-addon">
+            <i class="btn-addon-icon fe fe-plus-circle"></i>
+          </span>
+          Add Comment
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

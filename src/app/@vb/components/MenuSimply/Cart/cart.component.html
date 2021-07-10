@@ -1,0 +1,14 @@
+<div>
+  <div nz-dropdown nzTrigger="click" class="dropdown" [nzDropdownMenu]="menu" (nzVisibleChange)="badgeCountIncrease()">
+    <nz-badge [nzCount]="badgeCount">
+      <i class="icon fe fe-shopping-cart"></i>
+    </nz-badge>
+  </div>
+  <nz-dropdown-menu #menu="nzDropdownMenu">
+    <div class="card vb__utils__shadow width-350">
+      <div class="card-body">
+        <vb-widgets-general-26></vb-widgets-general-26>
+      </div>
+    </div>
+  </nz-dropdown-menu>
+</div>

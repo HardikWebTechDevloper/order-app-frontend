@@ -1,0 +1,47 @@
+<div class="table-responsive text-nowrap">
+  <nz-table #sortTable [nzData]="listOfData" nzTableLayout="fixed">
+    <thead>
+      <tr>
+        <th *ngFor="let column of listOfColumn" [nzSortFn]="column.compare" [nzSortPriority]="column.priority">{{
+          column.title }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of sortTable.data">
+        <td>
+          <a href="javascript: void(0);" class="btn btn-sm btn-light">
+            {{ data.id }}
+          </a>
+        </td>
+        <td>{{ data.date }}</td>
+        <td>
+          <a href="javascript: void(0);" class="btn btn-sm btn-light">
+            {{ data.customer }}
+          </a>
+        </td>
+        <td>{{ data.total }}</td>
+        <td>{{ data.tax }}</td>
+        <td>{{ data.shipping }}</td>
+        <td>{{ data.quantity }}</td>
+        <td>
+          <span
+            [ngClass]="[data.status === 'Processing' ? 'font-size-12 badge badge-primary' : 'font-size-12 badge badge-default']">
+            {{data.status}}
+          </span>
+        </td>
+        <td>
+          <a href="javascript: void(0);" class="btn btn-sm btn-light mr-2">
+            <i class="fe fe-edit mr-2"></i>
+            View
+          </a>
+          <a href="javascript: void(0);" class="btn btn-sm btn-light">
+            <small>
+              <i class="fe fe-trash mr-2"></i>
+            </small>
+            Remove
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

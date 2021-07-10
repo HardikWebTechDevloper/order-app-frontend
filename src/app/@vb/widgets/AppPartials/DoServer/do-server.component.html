@@ -1,0 +1,23 @@
+<div class="d-flex align-items-center flex-wrap">
+  <div class="d-flex flex-nowrap align-items-center width-200 flex-shrink-1 mr-2">
+    <div class="vb____utils__donut vb____utils__donut--success mr-2 flex-shrink-0"></div>
+    <a href="javascript: void(0);" class="font-weight-bold text-blue text-nowrap">mediatec-cdn</a>
+  </div>
+  <div class="flex-grow-1 mr-2">FRA1 / 1GB / 25GB Disk</div>
+  <div class="flex-grow-1 mr-auto">46.101.103.230</div>
+  <div class="d-inline-block">
+    <button type="button" class="btn btn-light" nz-dropdown [nzDropdownMenu]="menu" nzTrigger="click"
+      nzPlacement="bottomRight">
+      <i class="fe fe-more-vertical"></i>
+    </button>
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+      <ul nz-menu>
+        <li nz-menu-item><a href="javascript:;">Action</a></li>
+        <li nz-menu-item><a href="javascript:;">Another action</a></li>
+        <li nz-menu-item><a href="javascript:;">Something else here</a></li>
+        <li nz-menu-divider></li>
+        <li nz-menu-item><a href="javascript:;">Separated link</a></li>
+      </ul>
+    </nz-dropdown-menu>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+@import 'src/mixins.scss';
+
+::ng-deep {
+  .isPreselectedOpen {
+    position: static !important;
+    overflow-y: auto !important;
+
+    .cdk-overlay-container,
+    .cdk-overlay-backdrop,
+    .ant-modal-wrap {
+      pointer-events: none;
+    }
+
+    .ant-modal {
+      pointer-events: all !important;
+    }
+  }
+}
+
+.variantButton {
+  border-radius: 10px !important;
+  margin-right: rem(10);
+  margin-bottom: rem(10);
+}

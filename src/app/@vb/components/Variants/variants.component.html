@@ -1,0 +1,37 @@
+<nz-modal [(nzVisible)]="isPreselectedOpen" [nzFooter]="null" nzMask="false" nzTitle="Theme Configurator"
+  (nzOnCancel)="toggleModal()">
+  <ng-container *nzModalContent>
+    <h6 class="mb-3">
+      <strong>Pre-Configured Layouts</strong>
+    </h6>
+    <button nz-button [nzType]="key === preselectedVariant ? 'primary' : 'default'" nzSize="large" class="variantButton"
+      *ngFor="let key of themeKeys" (click)="applyVariant(key)">
+      {{ key }}
+    </button>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="mt-4">
+          <h6 class="mb-3">
+            <strong>Visual Builder Style</strong>
+          </h6>
+          <nz-radio-group [(ngModel)]="version" (ngModelChange)="settingChange($event, 'version')">
+            <label nz-radio-button nzValue="fluent">Fluent</label>
+            <label nz-radio-button nzValue="clean">Clean</label>
+            <label nz-radio-button nzValue="air">Air</label>
+          </nz-radio-group>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="mt-4">
+          <h6 class="mb-3">
+            <strong>Theme</strong>
+          </h6>
+          <nz-radio-group [(ngModel)]="theme" (ngModelChange)="settingChange($event, 'theme')">
+            <label nz-radio-button nzValue="default">Light</label>
+            <label nz-radio-button nzValue="dark">Dark</label>
+          </nz-radio-group>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</nz-modal>

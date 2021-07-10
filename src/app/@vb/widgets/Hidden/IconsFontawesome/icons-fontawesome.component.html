@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-xl-6 offset-xl-3">
+    <div class="text-center" *ngFor="let iconsSet of icons">
+      <h3 class="text-block mt-5 mb-4">
+        <strong>{{iconsSet.setName}}</strong>
+      </h3>
+      <ul class="vb__utils__iconPresent list-unstyled">
+        <li *ngFor="let icon of iconsSet.icons" nz-tooltip nzTooltipPlacement="top" [nzTooltipTitle]="'fa ' + icon">
+          <i [class]="'fa ' + icon"></i>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

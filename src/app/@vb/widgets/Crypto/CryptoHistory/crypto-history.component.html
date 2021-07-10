@@ -1,0 +1,22 @@
+<div class="table-responsive text-nowrap">
+  <nz-table #marketHistoryTable nzSize="small" [nzData]="marketHistoryData">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>BUY/SELL</th>
+        <th>BID/ASK</th>
+        <th>Units Total</th>
+        <th>Total Cost</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of marketHistoryTable.data">
+        <td>{{item.orderDate}}</td>
+        <td [ngClass]="[item.type === 'SELL' ? 'text-danger' : 'text-success']">{{item.type}}</td>
+        <td>{{item.bidAsk}}</td>
+        <td>{{item.unitsTotal}}</td>
+        <td>{{item.totalCost}}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

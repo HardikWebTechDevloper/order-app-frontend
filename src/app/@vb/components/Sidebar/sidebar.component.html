@@ -1,0 +1,570 @@
+<div>
+  <div class="vb__sidebar" [ngClass]="settings.isSidebarOpen ? 'vb__sidebar__toggled' : ''">
+    <perfect-scrollbar>
+      <div class="vb__sidebar__inner">
+        <a href="javascript: void(0);" class="fe fe-x vb__sidebar__close" (click)="toggleSettings()"></a>
+        <h5 class="mb-4">
+          <strong>Settings</strong>
+        </h5>
+        <nz-collapse nzAccordion [nzBordered]="false">
+          <nz-collapse-panel nzHeader="Application Settings" [nzActive]="true">
+            <div class="pt-3 mb-2">
+              <h6>
+                <strong>Application Name</strong>
+              </h6>
+              <input nz-input [ngModel]="settings.logo" (ngModelChange)="settingChange($event, 'logo')" />
+            </div>
+            <div class="pt-2 mb-2">
+              <h6>
+                <strong>Router Animation</strong>
+              </h6>
+              <nz-select style="width: 100%;" [(ngModel)]="settings.routerAnimation"
+                (ngModelChange)="settingChange($event, 'routerAnimation')">
+                <nz-option nzLabel="None" nzValue="none"></nz-option>
+                <nz-option nzLabel="Slide Up" nzValue="slide-fadein-up"></nz-option>
+                <nz-option nzLabel="Slide Right" nzValue="slide-fadein-right"></nz-option>
+                <nz-option nzLabel="Fade In" nzValue="fadein"></nz-option>
+                <nz-option nzLabel="Zoom" nzValue="zoom-fadein"></nz-option>
+              </nz-select>
+            </div>
+            <div class="pt-2 mb-2">
+              <h6>
+                <strong>Internationalization</strong>
+              </h6>
+              <nz-select style="width: 100%;" [(ngModel)]="settings.locale"
+                (ngModelChange)="settingChange($event, 'locale')">
+                <nz-option nzLabel="English (en-US)" nzValue="en-US"></nz-option>
+                <nz-option nzLabel="French (fr-FR)" nzValue="fr-FR"></nz-option>
+                <nz-option nzLabel="Русский (ru-RU)" nzValue="ru-RU"></nz-option>
+                <nz-option nzLabel="简体中文 (zh-CN)" nzValue="zh-CN"></nz-option>
+              </nz-select>
+            </div>
+          </nz-collapse-panel>
+          <nz-collapse-panel nzHeader="Layout Settings">
+            <div class="pt-3 mb-2">
+              <h6>
+                <strong>Visual Builder Style</strong>
+              </h6>
+              <div class="pt-1 clearfix">
+                <nz-radio-group [(ngModel)]="settings.version" (ngModelChange)="settingChange($event, 'version')">
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="mb-2">
+                        <label nz-radio nzValue="fluent">Fluent (System Default Font)</label>
+                      </div>
+                      <div class="mb-2">
+                        <label nz-radio nzValue="clean">Clean (Mukta Font)</label>
+                      </div>
+                      <div class="mb-2">
+                        <label nz-radio nzValue="air">Air (Source Sans Font)</label>
+                      </div>
+                    </div>
+                  </div>
+                </nz-radio-group>
+              </div>
+            </div>
+            <div class="pt-2 mb-2">
+              <div class="row">
+                <div class="col-auto mr-auto">
+                  <h6>
+                    <strong>Dark Theme</strong>
+                  </h6>
+                </div>
+                <div class="col-auto">
+                  <div class="{style.vb__sidebar__fixSwitch}">
+                    <nz-switch [(ngModel)]="settings.theme" (ngModelChange)="settingChangeTheme($event, 'theme')">
+                    </nz-switch>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pt-2 mb-2">
+              <div class="row">
+                <div class="col-auto mr-auto">
+                  <h6>
+                    <strong>Content Max-Width</strong>
+                  </h6>
+                </div>
+                <div class="col-auto">
+                  <div class="vb__sidebar__fixSwitch">
+                    <nz-switch [(ngModel)]="settings.isContentMaxWidth"
+                      (ngModelChange)="settingChange($event, 'isContentMaxWidth')">
+                    </nz-switch>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pt-2 mb-2">
+              <div class="row">
+                <div class="col-auto mr-auto">
+                  <h6>
+                    <strong>Layout Max-Width</strong>
+                  </h6>
+                </div>
+                <div class="col-auto">
+                  <div class="vb__sidebar__fixSwitch">
+                    <nz-switch [(ngModel)]="settings.isAppMaxWidth"
+                      (ngModelChange)="settingChange($event, 'isAppMaxWidth')">
+                    </nz-switch>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pt-2 mb-2">
+              <div class="row">
+                <div class="col-auto mr-auto">
+                  <h6>
+                    <strong>Layout Gray Bg</strong>
+                  </h6>
+                </div>
+                <div class="col-auto">
+                  <div class="vb__sidebar__fixSwitch">
+                    <nz-switch [(ngModel)]="settings.isGrayBackground"
+                      (ngModelChange)="settingChange($event, 'isGrayBackground')">
+                    </nz-switch>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pt-2 mb-2">
+              <div class="row">
+                <div class="col-auto mr-auto">
+                  <h6>
+                    <strong>Card Squared Borders</strong>
+                  </h6>
+                </div>
+                <div class="col-auto">
+                  <div class="vb__sidebar__fixSwitch">
+                    <nz-switch [(ngModel)]="settings.isSquaredBorders"
+                      (ngModelChange)="settingChange($event, 'isSquaredBorders')">
+                    </nz-switch>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pt-2 mb-2">
+              <div class="row">
+                <div class="col-auto mr-auto">
+                  <h6>
+                    <strong>Card Shadow</strong>
+                  </h6>
+                </div>
+                <div class="col-auto">
+                  <div class="vb__sidebar__fixSwitch">
+                    <nz-switch [(ngModel)]="settings.isCardShadow"
+                      (ngModelChange)="settingChange($event, 'isCardShadow')">
+                    </nz-switch>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pt-2 mb-2">
+              <div class="row">
+                <div class="col-auto mr-auto">
+                  <h6>
+                    <strong>Card Borderless</strong>
+                  </h6>
+                </div>
+                <div class="col-auto">
+                  <div class="vb__sidebar__fixSwitch">
+                    <nz-switch [(ngModel)]="settings.isBorderless"
+                      (ngModelChange)="settingChange($event, 'isBorderless')">
+                    </nz-switch>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pt-2 mb-2">
+              <div class="row">
+                <div class="col-auto mr-auto">
+                  <h6>
+                    <strong>Auth Layout Topbar</strong>
+                  </h6>
+                </div>
+                <div class="col-auto">
+                  <div class="vb__sidebar__fixSwitch">
+                    <nz-switch [(ngModel)]="settings.isAuthTopbar"
+                      (ngModelChange)="settingChange($event, 'isAuthTopbar')">
+                    </nz-switch>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pt-2 mb-2">
+              <div class="row">
+                <div class="col-auto mr-auto">
+                  <h6>
+                    <strong>Auth Layout Bg</strong>
+                  </h6>
+                </div>
+                <div class="col-auto">
+                  <div class="vb__sidebar__fixSwitch">
+                    <ng-container
+                      *ngTemplateOutlet="colorTpl; context: {$implicit: 'authPagesColor', colors: ['white', 'gray', 'image'], active: settings.authPagesColor}">
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nz-collapse-panel>
+          <nz-collapse-panel nzHeader="Menu Settings">
+            <div class="pt-3 mb-2">
+              <h6>
+                <strong>Menu Variant</strong>
+              </h6>
+              <div class="pt-1 clearfix">
+                <nz-radio-group style="width: 100%;" [(ngModel)]="settings.layoutMenu"
+                  (ngModelChange)="settingChange($event, 'layoutMenu')">
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="mb-2">
+                        <label nz-radio nzValue="classic">Classic</label>
+                      </div>
+                      <div class="mb-2">
+                        <label nz-radio nzValue="flyout">Flyout</label>
+                      </div>
+                      <div class="mb-2">
+                        <label nz-radio nzValue="simply">Simply</label>
+                      </div>
+                    </div>
+                    <div className="col-6">
+                      <div className="mb-2">
+                        <label nz-radio nzValue="noMenu">None</label>
+                      </div>
+                    </div>
+                  </div>
+                </nz-radio-group>
+              </div>
+            </div>
+            <div *ngIf="settings.layoutMenu === 'classic' || settings.layoutMenu === 'flyout'">
+              <div class="pt-2 mb-2">
+                <h6>
+                  <strong>Menu Layout Type</strong>
+                </h6>
+                <div class="pt-1 clearfix">
+                  <nz-radio-group style="width: 100%;" [(ngModel)]="settings.menuLayoutType"
+                    (ngModelChange)="settingChange($event, 'menuLayoutType')">
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="mb-2">
+                          <label nz-radio nzValue="left">Left</label>
+                        </div>
+                        <div class="mb-2">
+                          <label nz-radio nzValue="top">Top</label>
+                        </div>
+                      </div>
+                    </div>
+                  </nz-radio-group>
+                </div>
+              </div>
+              <div *ngIf="settings.layoutMenu === 'flyout'" class="pt-2 mb-2">
+                <h6>
+                  <strong>Sub Menu Type</strong>
+                </h6>
+                <div class="pt-1 clearfix">
+                  <nz-radio-group style="width: 100%;" [(ngModel)]="settings.flyoutMenuType"
+                    (ngModelChange)="settingChange($event, 'flyoutMenuType')">
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="mb-2">
+                          <label nz-radio nzValue="flyout">Flyout</label>
+                        </div>
+                        <div class="mb-2">
+                          <label nz-radio nzValue="default">Default</label>
+                        </div>
+                        <div class="mb-2">
+                          <label nz-radio nzValue="compact">Compact</label>
+                        </div>
+                      </div>
+                    </div>
+                  </nz-radio-group>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="
+                settings.layoutMenu === 'classic' ||
+                settings.layoutMenu === 'flyout' ||
+                settings.layoutMenu === 'simply'
+              ">
+              <div class="pt-2 mb-2">
+                <div class="row">
+                  <div class="col-auto mr-auto">
+                    <h6>
+                      <strong>Menu Color</strong>
+                    </h6>
+                  </div>
+                  <div class="col-auto">
+                    <div class="vb__sidebar__fixColorPicker">
+                      <ng-container
+                        *ngTemplateOutlet="colorTpl; context: {$implicit: 'menuColor', colors: ['white', 'gray', 'dark'], active: settings.menuColor}">
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="settings.layoutMenu === 'flyout'">
+              <div *ngIf="
+                  settings.flyoutMenuType === 'flyout' || settings.flyoutMenuType === 'compact'
+                " class="pt-2 mb-2">
+                <div class="row">
+                  <div class="col-auto mr-auto">
+                    <h6>
+                      <strong>Flyout Color</strong>
+                    </h6>
+                  </div>
+                  <div class="col-auto">
+                    <div class="vb__sidebar__fixColorPicker">
+                      <ng-container
+                        *ngTemplateOutlet="colorTpl; context: {$implicit: 'flyoutMenuColor', colors: ['white', 'gray', 'dark', 'blue'], active: settings.flyoutMenuColor}">
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="settings.layoutMenu === 'classic' || settings.layoutMenu === 'flyout'">
+              <div class="pt-2 mb-2">
+                <div class="row">
+                  <div class="col-auto mr-auto">
+                    <h6>
+                      <strong>Menu Collapsed</strong>
+                    </h6>
+                  </div>
+                  <div class="col-auto">
+                    <div class="vb__sidebar__fixSwitch">
+                      <nz-switch [(ngModel)]="settings.isMenuCollapsed"
+                        (ngModelChange)="settingChange($event, 'isMenuCollapsed')">
+                      </nz-switch>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="pt-2 mb-2">
+                <div class="row">
+                  <div class="col-auto mr-auto">
+                    <h6>
+                      <strong>Menu Unfixed</strong>
+                    </h6>
+                  </div>
+                  <div class="col-auto">
+                    <div class="vb__sidebar__fixSwitch">
+                      <nz-switch [(ngModel)]="settings.isMenuUnfixed"
+                        (ngModelChange)="settingChange($event, 'isMenuUnfixed')">
+                      </nz-switch>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="pt-2 mb-2">
+                <div class="row">
+                  <div class="col-auto mr-auto">
+                    <h6>
+                      <strong>Menu Shadow</strong>
+                    </h6>
+                  </div>
+                  <div class="col-auto">
+                    <div class="vb__sidebar__fixSwitch">
+                      <nz-switch [(ngModel)]="settings.isMenuShadow"
+                        (ngModelChange)="settingChange($event, 'isMenuShadow')">
+                      </nz-switch>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="settings.menuLayoutType === 'left'" class="pt-2 mb-2">
+                <h6>
+                  <strong>Menu Width</strong>
+                </h6>
+                <div class="pt-1 clearfix">
+                  <nz-slider [ngModel]="settings.leftMenuWidth" (ngModelChange)="setWidth($event)" [nzMin]="256"
+                    [nzMax]="330">
+                  </nz-slider>
+                </div>
+              </div>
+            </div>
+          </nz-collapse-panel>
+          <nz-collapse-panel nzHeader="Topbar Settings">
+            <div class="pt-3 mb-2">
+              <h6>
+                <strong>Topbar Variant</strong>
+              </h6>
+              <nz-radio-group style="width: 100%;" [(ngModel)]="settings.layoutTopbar"
+                (ngModelChange)="settingChange($event, 'layoutTopbar')">
+                <div class="row">
+                  <div class="col-6">
+                    <div class="mb-2">
+                      <label nz-radio nzValue="v1">Variant 1</label>
+                    </div>
+                  </div>
+                  <div className="col-6">
+                    <div class="mb-2">
+                      <label nz-radio nzValue="none">None</label>
+                    </div>
+                  </div>
+                </div>
+              </nz-radio-group>
+            </div>
+            <div class="pt-2 mb-2">
+              <div class="row">
+                <div class="col-auto mr-auto">
+                  <h6>
+                    <strong>Topbar Separated</strong>
+                  </h6>
+                </div>
+                <div class="col-auto">
+                  <div class="vb__sidebar__fixSwitch">
+
+                    <nz-switch [(ngModel)]="settings.isTopbarSeparated"
+                      (ngModelChange)="settingChange($event, 'isTopbarSeparated')">
+                    </nz-switch>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pt-2 mb-2">
+              <div class="row">
+                <div class="col-auto mr-auto">
+                  <h6>
+                    <strong>Topbar Fixed</strong>
+                  </h6>
+                </div>
+                <div class="col-auto">
+                  <div class="vb__sidebar__fixSwitch">
+                    <nz-switch [(ngModel)]="settings.isTopbarFixed"
+                      (ngModelChange)="settingChange($event, 'isTopbarFixed')">
+                    </nz-switch>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pt-2 mb-2">
+              <div class="row">
+                <div class="col-auto mr-auto">
+                  <h6>
+                    <strong>Topbar Gray Bg</strong>
+                  </h6>
+                </div>
+                <div class="col-auto">
+                  <div class="vb__sidebar__fixSwitch">
+                    <nz-switch [(ngModel)]="settings.isGrayTopbar"
+                      (ngModelChange)="settingChange($event, 'isGrayTopbar')">
+                    </nz-switch>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nz-collapse-panel>
+          <nz-collapse-panel nzHeader="Breadcrumbs Settings">
+            <div class="pt-3 mb-2">
+              <h6>
+                <strong>Breadcrumbs Variant</strong>
+              </h6>
+              <nz-radio-group style="width: 100%;" [(ngModel)]="settings.layoutBreadcrumbs"
+                (ngModelChange)="settingChange($event, 'layoutBreadcrumbs')">
+                <div class="row">
+                  <div class="col-6">
+                    <div class="mb-2">
+                      <label nz-radio nzValue="v1">Variant 1</label>
+                    </div>
+                    <div class="mb-2">
+                      <label nz-radio nzValue="v2">Variant 2</label>
+                    </div>
+                  </div>
+                  <div className="col-6">
+                    <div class="mb-2">
+                      <label nz-radio nzValue="noBreadcrumbs">None</label>
+                    </div>
+                  </div>
+                </div>
+              </nz-radio-group>
+            </div>
+          </nz-collapse-panel>
+          <nz-collapse-panel nzHeader="Footer Settings">
+            <div class="pt-3 mb-1">
+              <h6>
+                <strong>Footer Variant</strong>
+              </h6>
+              <nz-radio-group style="width: 100%;" [(ngModel)]="settings.layoutFooter"
+                (ngModelChange)="settingChange($event, 'layoutFooter')">
+                <div class="row">
+                  <div class="col-6">
+                    <div class="mb-2">
+                      <label nz-radio nzValue="v1">Variant 1</label>
+                    </div>
+                    <div class="mb-2">
+                      <label nz-radio nzValue="v2">Variant 2</label>
+                    </div>
+                    <div class="mb-2">
+                      <label nz-radio nzValue="v3">Variant 3</label>
+                    </div>
+                    <div class="mb-2">
+                      <label nz-radio nzValue="v4">Variant 4</label>
+                    </div>
+                  </div>
+                  <div className="col-6">
+                    <div class="mb-2">
+                      <label nz-radio nzValue="noFooter">None</label>
+                    </div>
+                  </div>
+                </div>
+              </nz-radio-group>
+            </div>
+          </nz-collapse-panel>
+        </nz-collapse>
+      </div>
+    </perfect-scrollbar>
+  </div>
+  <div class="vb__utils__sidebar__buttons">
+
+    <a href="https://visualbuilder.cloud" target="_blank" nzTooltipTitle="Try Visual Builder" nzTooltipPlacement="left"
+      nz-tooltip class="vb__utils__sidebar__button">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" version="1.1" height="24px" width="24px">
+        <g>
+          <path fill="#4b7cf3" strokeWidth="1" stroke="#4b7cf3"
+            d="M12,10.9c-0.1,0-0.2,0-0.2-0.1L3.5,6.1C3.4,6,3.3,5.8,3.3,5.6c0-0.2,0.1-0.3,0.2-0.4l8.2-4.7c0.2-0.1,0.3-0.1,0.5,0      l8.2,4.7c0.2,0.1,0.2,0.3,0.2,0.4S20.6,6,20.5,6.1l-8.2,4.7C12.2,10.8,12.1,10.9,12,10.9z M4.8,5.6L12,9.8l7.2-4.2L12,1.5      L4.8,5.6z" />
+          <path fill="#4b7cf3" strokeWidth="1" stroke="#4b7cf3"
+            d="M13.6,23.6c-0.1,0-0.2,0-0.2-0.1c-0.2-0.1-0.2-0.3-0.2-0.4v-9.5c0-0.2,0.1-0.3,0.2-0.4l8.2-4.7c0.2-0.1,0.3-0.1,0.5,0      c0.2,0.1,0.2,0.3,0.2,0.4v9.5c0,0.2-0.1,0.3-0.3,0.4l-8.2,4.7C13.8,23.6,13.7,23.6,13.6,23.6z M14.1,13.9v8.3l7.2-4.2V9.8      L14.1,13.9z" />
+          <path fill="#4b7cf3" strokeWidth="1" stroke="#4b7cf3"
+            d="M10.4,23.6c-0.1,0-0.2,0-0.2-0.1l-8.2-4.7c-0.2-0.1-0.3-0.3-0.3-0.4V8.9c0-0.2,0.1-0.3,0.2-0.4c0.2-0.1,0.3-0.1,0.5,0      l8.2,4.7c0.2,0.1,0.2,0.3,0.2,0.4v9.5c0,0.2-0.1,0.3-0.2,0.4C10.5,23.6,10.5,23.6,10.4,23.6z M2.7,18.1l7.2,4.2v-8.3L2.7,9.8      V18.1z" />
+        </g>
+      </svg>
+    </a>
+    <a href="javascript: void(0);" (click)="toggleSettings()" nzTooltipTitle="Settings" nzTooltipPlacement="left"
+      nz-tooltip class="vb__utils__sidebar__button">
+      <i class="fe fe-settings"></i>
+    </a>
+    <a href="javascript: void(0);" (click)="togglePreselectedThemes()" nzTooltipTitle="Pre-Configured Layouts"
+      nzTooltipPlacement="left" nz-tooltip class="vb__utils__sidebar__button">
+      <i class="fe fe-image"></i>
+    </a>
+    <a href="javascript: void(0);" (click)="setTheme(settings.theme === 'default' ? 'dark' : 'default')"
+      nzTooltipTitle="Switch Dark / Light Theme" nzTooltipPlacement="left" nz-tooltip
+      class="vb__utils__sidebar__button">
+      <i *ngIf="settings.theme === 'default'" class="fe fe-moon"></i>
+      <i *ngIf="settings.theme !== 'default'" class="fe fe-sun"></i>
+    </a>
+    <a href="javascript: void(0);" nzTooltipTitle="Set Primary Color" nzTooltipPlacement="left" nz-tooltip
+      class="vb__utils__sidebar__button vb__utils__sidebar__button__color" [ngClass]="{
+        vb__utils__sidebar__button__color__reset: settings.primaryColor === defaultColor}">
+      <button type="button" tabindex="0" (click)="resetColor()">
+        <i class="fe fe-x-circle"></i>
+      </button>
+      <input type="color" id="colorPicker" (change)="setPrimaryColor($event)" [ngModel]="settings.primaryColor" />
+      <i class="fe fe-package"></i>
+    </a>
+    <a href="https://docs.visualbuilder.cloud" target="_blank" rel="noopener noreferrer" nzTooltipTitle="Documentation"
+      nzTooltipPlacement="left" nz-tooltip class="vb__utils__sidebar__button">
+      <i class="fe fe-book-open"></i>
+    </a>
+  </div>
+</div>
+
+<ng-template #colorTpl let-setting let-colors="colors" let-active="active">
+  <ng-container *ngFor="let item of colors">
+    <a href="javascript: void(0);" (click)="settingChange(item, setting)" class="vb__sidebar__select__item" [ngClass]="{
+        vb__sidebar__select__item__active: active === item, vb__sidebar__select__item__black: item === 'dark',
+        vb__sidebar__select__item__white: item === 'white', vb__sidebar__select__item__gray: item === 'gray',
+        vb__sidebar__select__item__blue: item === 'blue', vb__sidebar__select__item__img: item === 'image'}"></a>
+  </ng-container>
+</ng-template>

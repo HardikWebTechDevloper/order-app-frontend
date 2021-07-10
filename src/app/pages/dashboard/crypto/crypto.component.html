@@ -1,0 +1,41 @@
+<div>
+  <div class="row">
+    <div class="col-lg-3 col-md-12">
+      <div class="card-placeholder">
+        <div class="card-body"><vb-crypto-crypto-list></vb-crypto-crypto-list></div>
+      </div>
+    </div>
+    <div class="col-lg-9 col-md-12">
+      <div class="card card-top card-top-success">
+        <div class="card-header py-0">
+          <vb-headers-card-header-3 [data]="{'title':'BTC-USD Market'}"></vb-headers-card-header-3>
+        </div>
+        <div class="card-body"><vb-crypto-crypto-chart></vb-crypto-crypto-chart></div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <vb-headers-card-header [data]="{'title':'Order Book'}"></vb-headers-card-header>
+        </div>
+        <div class="card-body"><vb-crypto-crypto-orders></vb-crypto-crypto-orders></div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <vb-headers-card-header [data]="{'title':'Market History'}"></vb-headers-card-header>
+        </div>
+        <div class="card-body"><vb-crypto-crypto-history></vb-crypto-crypto-history></div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <vb-headers-card-header [data]="{'title':'My Open Orders'}"></vb-headers-card-header>
+        </div>
+        <div class="card-body"><vb-crypto-crypto-load-table></vb-crypto-crypto-load-table></div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <vb-headers-card-header [data]="{'title':'My Order History'}"></vb-headers-card-header>
+        </div>
+        <div class="card-body"><vb-crypto-crypto-load-table></vb-crypto-crypto-load-table></div>
+      </div>
+    </div>
+  </div>
+</div>

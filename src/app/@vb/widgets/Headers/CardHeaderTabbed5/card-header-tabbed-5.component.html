@@ -1,0 +1,19 @@
+<div class="card-header-flex">
+  <div class="d-flex flex-column justify-content-center mr-auto">
+    <h5 class="mb-0">
+      <i [ngClass]="data.icon" class="mr-1 font-size-18 text-muted"></i>
+      <strong>{{ data.title }}</strong>
+    </h5>
+  </div>
+  <nz-tabset class="vb-tabs-bold" [nzSelectedIndex]="0">
+    <nz-tab [nzTitle]="leftTemplate">
+      <ng-template #leftTemplate><i class="fe fe-align-left mr-1"></i> Left</ng-template>
+    </nz-tab>
+    <nz-tab [nzTitle]="centerTemplate">
+      <ng-template #centerTemplate><i class="fe fe-align-center mr-1"></i> Center</ng-template>
+    </nz-tab>
+    <nz-tab [nzTitle]="rightTemplate">
+      <ng-template #rightTemplate><i class="fe fe-align-right mr-1"></i> Right</ng-template>
+    </nz-tab>
+  </nz-tabset>
+</div>

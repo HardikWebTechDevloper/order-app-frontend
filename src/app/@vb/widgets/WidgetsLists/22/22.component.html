@@ -1,0 +1,25 @@
+<div>
+  <div class="mb-4">
+    <nz-input-group [nzPrefix]="prefixTemplate">
+      <input type="text" nz-input placeholder="Search users..." />
+    </nz-input-group>
+    <ng-template #prefixTemplate><i nz-icon nzType="search"></i></ng-template>
+  </div>
+  <a *ngFor="let item of dialogs; let i = index;" [ngClass]="['item', i === activeIndex ? 'current' : '']"
+    class="d-flex flex-nowrap align-items-center" (click)="changeDialog(i)">
+    <div class="vb__utils__avatar vb__utils__avatar--size46 mr-3 flex-shrink-0">
+      <img [src]="item.avatar" [alt]="item.name" />
+    </div>
+    <div class="flex-grow-1 info">
+      <div class="text-uppercase font-size-12 text-truncate text-gray-6">
+        {{item.position}}
+      </div>
+      <div class="text-dark font-size-18 font-weight-bold text-truncate">
+        {{item.name}}
+      </div>
+    </div>
+    <div *ngIf="item.unread" class="flex-shrink-0 align-self-start unread">
+      <div class="badge badge-success">{{item.unread}}</div>
+    </div>
+  </a>
+</div>

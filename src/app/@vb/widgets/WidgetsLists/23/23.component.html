@@ -1,0 +1,16 @@
+<div>
+  <div class="mb-4">
+    <nz-input-group [nzPrefix]="prefixTemplate">
+      <input type="text" nz-input placeholder="Search message..." />
+    </nz-input-group>
+    <ng-template #prefixTemplate><i nz-icon nzType="search"></i></ng-template>
+  </div>
+  <div class="d-flex flex-column">
+    <a *ngFor="let item of dialogs; let i = index;"
+      [ngClass]="['item', i === activeIndex ? 'current' : '', item.count ? 'font-weight-bold' : '']"
+      class="text-dark font-size-18" (click)="changeDialog(i)">
+      <span class="text-truncate mr-1">{{ item.name }}</span>
+      <span *ngIf="item.count">({{ item.count }})</span>
+    </a>
+  </div>
+</div>

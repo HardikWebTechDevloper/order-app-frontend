@@ -1,0 +1,41 @@
+<div class="d-flex flex-wrap">
+  <div class="mr-auto pr-3 my-2">
+    <i class="fe fe-book font-size-21 mr-2"></i>
+    <div class="text-nowrap d-inline-block font-size-18 text-dark">
+      <a class="font-size-18 text-blue" href="javascript: void(0);">umijs</a> /
+      <a class="font-size-18 text-blue" href="javascript: void(0);">umi</a>
+    </div>
+  </div>
+  <div class="d-flex flex-wrap font-size-16">
+    <div class="mr-3 my-2 text-nowrap">
+      <i class="fe fe-user-check font-size-21 mr-1"></i>
+      Watch
+      <strong class="text-dark font-size-18 ml-1">6,870</strong>
+    </div>
+    <div class="mr-3 my-2 text-nowrap">
+      <i class="fe fe-star font-size-21 mr-1"></i>
+      Star
+      <strong class="text-dark font-size-18 ml-1">16,356</strong>
+    </div>
+    <div class="mr-3 my-2 text-nowrap">
+      <i class="fe fe-copy font-size-21 mr-1"></i>
+      Fork
+      <strong class="text-dark font-size-18 ml-1">569</strong>
+    </div>
+  </div>
+</div>
+<nz-tabset class="vb-tabs-bordered mb-2" [nzSelectedIndex]="0">
+  <nz-tab nzTitle="Code"></nz-tab>
+  <nz-tab [nzTitle]="titleTemplate">
+    <ng-template #titleTemplate>
+      Issues <strong>(85)</strong>
+    </ng-template>
+  </nz-tab>
+  <nz-tab [nzTitle]="titleTemplate">
+    <ng-template #titleTemplate>
+      Pull requests <strong>(4)</strong>
+    </ng-template>
+  </nz-tab>
+  <nz-tab nzTitle="Sequrity"></nz-tab>
+  <nz-tab nzTitle="Insights"></nz-tab>
+</nz-tabset>
