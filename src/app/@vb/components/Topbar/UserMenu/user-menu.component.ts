@@ -2,6 +2,9 @@ import { Component } from '@angular/core'
 import { select, Store } from '@ngrx/store'
 import * as UserActions from 'src/app/store/user/actions'
 import * as Reducers from 'src/app/store/reducers'
+import { AuthService } from 'src/app/services/auth.service'
+import { Router } from '@angular/router'
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'vb-topbar-user-menu',
@@ -13,8 +16,14 @@ export class TopbarUserMenuComponent {
   role: string = ''
   email: string = ''
   phone: string = ''
+  currentUser: any;
 
-  constructor(private store: Store<any>) {
+  constructor(
+    private store: Store<any>,
+    private authService: AuthService,
+    public router: Router,
+    public cf: ChangeDetectorRef
+  ) {
     this.store.pipe(select(Reducers.getUser)).subscribe(state => {
       this.name = state.name
       this.role = state.role
@@ -22,7 +31,22 @@ export class TopbarUserMenuComponent {
     })
   }
 
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+  }
+
+  ngAfterViewInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+
+    let currentUserValue: any = this.authService.currentUserValue;
+    this.currentUser = currentUserValue.user;
+    this.cf.detectChanges();
+  }
+
   logout() {
-    this.store.dispatch(new UserActions.Logout())
+    this.authService.logout();
+    this.router.navigate(['/auth/login']);
   }
 }

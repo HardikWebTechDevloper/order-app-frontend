@@ -26,7 +26,11 @@ import { MockHttpCallInterceptor } from './services/fakeApi'
 // locale resistration
 import { registerLocaleData } from '@angular/common'
 import { default as localeEn } from '@angular/common/locales/en'
-import { NZ_I18N, en_US as localeZorro } from 'ng-zorro-antd/i18n'
+import { NZ_I18N, en_US as localeZorro } from 'ng-zorro-antd/i18n';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzModalModule } from 'ng-zorro-antd/modal'
+import { ListDistributorsComponent } from './components/distributors/list-distributors/list-distributors.component';
+
 const LOCALE_PROVIDERS = [
   { provide: LOCALE_ID, useValue: 'en' },
   { provide: NZ_I18N, useValue: localeZorro },
@@ -34,13 +38,14 @@ const LOCALE_PROVIDERS = [
 registerLocaleData(localeEn, 'en')
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ListDistributorsComponent],
   imports: [
     HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     AppRoutingModule,
+    NzModalModule,
 
     // translate
     TranslateModule.forRoot(),
@@ -63,6 +68,9 @@ registerLocaleData(localeEn, 'en')
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
+
+    // Table
+    NzTableModule,
   ],
   providers: [
     // auth services
@@ -84,4 +92,4 @@ registerLocaleData(localeEn, 'en')
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

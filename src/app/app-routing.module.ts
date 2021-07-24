@@ -76,6 +76,7 @@ import { AdvancedColorsComponent } from './pages/advanced/colors/colors.componen
 import { NestedComponent } from './pages/nested/nested.component'
 import { Nested1Component } from './pages/nested/1/1.component'
 import { Nested2Component } from './pages/nested/2/2.component'
+import { ListDistributorsComponent } from './components/distributors/list-distributors/list-distributors.component';
 
 // VB:REPLACE-END:ROUTER-IMPORTS
 
@@ -95,27 +96,12 @@ const routes: Routes = [
       {
         path: 'dashboard',
         data: { title: 'Dashboards' },
-        component: DashboardComponent,
-      },
-      {
-        path: 'dashboard/alpha',
-        data: { title: 'Dashboard Alpha' },
         component: DashboardAlphaComponent,
       },
       {
-        path: 'dashboard/beta',
-        data: { title: 'Dashboard Beta' },
-        component: DashboardBetaComponent,
-      },
-      {
-        path: 'dashboard/gamma',
-        data: { title: 'Dashboard Gamma' },
-        component: DashboardGammaComponent,
-      },
-      {
-        path: 'dashboard/crypto',
-        data: { title: 'Crypto Terminal' },
-        component: DashboardCryptoComponent,
+        path: 'distributors',
+        data: { title: 'Distributors' },
+        component: ListDistributorsComponent,
       },
       {
         path: 'apps',

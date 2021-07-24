@@ -1,0 +1,52 @@
+<div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="pull-left">
+                        Distributors
+                    </h4>
+                    <button nz-button class="btn btn-primary btn-lg px-5 pull-right" (click)="showModal()">
+                        <span>Create</span>
+                    </button>
+                </div>
+                <div class="card-body">
+                    <nz-table #rowSelectionTable nzShowPagination nzShowSizeChanger [nzData]="listOfAllData"
+                        (nzCurrentPageDataChange)="currentPageDataChange($event)" class="vb__utils__table mb-4">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Pincode</th>
+                                <th>Distributor Commision (%)</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of rowSelectionTable.data">
+                                <td>{{ data.first_name }} {{ data.last_name }}</td>
+                                <td>{{ data.phone }}</td>
+                                <td>{{ data.email }}</td>
+                                <td>{{ data.pin_code }}</td>
+                                <td>{{ data.distributor_commision }}</td>
+                                <td>
+                                    <button class="btn btn-primary btn-xs"><i class="fe fe-edit"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </nz-table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+    <ng-container *nzModalContent>
+        <p>Content one</p>
+        <p>Content two</p>
+        <p>Content three</p>
+    </ng-container>
+</nz-modal>
