@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { CommonService } from 'src/app/services/common.service';
-import * as Reducers from 'src/app/store/reducers';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';

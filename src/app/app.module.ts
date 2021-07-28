@@ -29,6 +29,7 @@ import { default as localeEn } from '@angular/common/locales/en'
 import { NZ_I18N, en_US as localeZorro } from 'ng-zorro-antd/i18n';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzModalModule } from 'ng-zorro-antd/modal'
+import { NzFormModule } from 'ng-zorro-antd/form'
 import { ListDistributorsComponent } from './components/distributors/list-distributors/list-distributors.component';
 
 const LOCALE_PROVIDERS = [

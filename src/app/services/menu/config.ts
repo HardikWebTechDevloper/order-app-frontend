@@ -12,12 +12,6 @@ export const getMenuData: any[] = [
     icon: 'fe fe-home'
   },
   {
-    title: 'Tables',
-    key: '62sqvb',
-    url: '/tables/antd',
-    icon: 'fe fe-grid'
-  },
-  {
     title: 'Distributors',
     key: '62sqvb',
     url: '/distributors',
