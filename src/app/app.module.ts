@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgModule, LOCALE_ID } from '@angular/core'
 import { TranslateModule } from '@ngx-translate/core'
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 
 import { NgProgressModule } from '@ngx-progressbar/core'
@@ -47,6 +47,8 @@ registerLocaleData(localeEn, 'en')
     FormsModule,
     AppRoutingModule,
     NzModalModule,
+    ReactiveFormsModule,
+    NzFormModule,
 
     // translate
     TranslateModule.forRoot(),

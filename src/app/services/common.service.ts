@@ -16,4 +16,24 @@ export class CommonService {
     return this.http.post<any>(`${environment.API_URL}user/get/all`, { "role_name": "Distributor" }).pipe(map((data) => { return data; }));
   }
 
+  getCountriesList() {
+    return this.http.post<any>(`${environment.API_URL}country/get/all`, {}).pipe(map((data) => { return data; }));
+  }
+
+  getStatesList(country_id) {
+    return this.http.post<any>(`${environment.API_URL}state/get/all`, { country_id }).pipe(map((data) => { return data; }));
+  }
+
+  getCitiesList(state_id) {
+    return this.http.post<any>(`${environment.API_URL}city/get/all`, { state_id }).pipe(map((data) => { return data; }));
+  }
+
+  getRoles() {
+    return this.http.post<any>(`${environment.API_URL}role/get/all`, {}).pipe(map((data) => { return data; }));
+  }
+
+  createDistributor(request) {
+    return this.http.post<any>(`${environment.API_URL}user/distributor/create`, request).pipe(map((data) => { return data; }));
+  }
+
 }
