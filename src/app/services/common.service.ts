@@ -36,4 +36,8 @@ export class CommonService {
     return this.http.post<any>(`${environment.API_URL}user/distributor/create`, request).pipe(map((data) => { return data; }));
   }
 
+  sendOTP(request){
+    return this.http.post<any>(`${environment.API_URL}user/sendOTP`, request).pipe(map((data) => { return data; }));
+  }
+
 }

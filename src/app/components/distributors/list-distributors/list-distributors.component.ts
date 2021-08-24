@@ -201,6 +201,10 @@ export class ListDistributorsComponent implements OnInit {
     this.isVisible = true;
     this.getCountriesList();
   }
+
+  handleCancel(): void {
+    this.isVisible = false;
+  }
 }
 
 export interface Data {

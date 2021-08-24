@@ -42,36 +42,38 @@
     </div>
 </div>
 
-<nz-modal [(nzVisible)]="isVisible" nzTitle="Created Distributor">
-    <ng-container *nzModalContent>
-        <div>
-            <form [formGroup]="createDistributorForm" (ngSubmit)="onSubmit()">
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Create Distributor" (nzOnCancel)="handleCancel()">
+    <form [formGroup]="createDistributorForm">
+        <ng-container *nzModalContent>
+            <div>
                 <div class="form-group">
                     <label for="first_name">First Name</label>
-                    <input type="text" class="form-control" formControlName="first_name" placeholder="Enter First Name" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }">
+                    <input type="text" class="form-control" formControlName="first_name" placeholder="Enter First Name"
+                        [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }">
                     <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
                         <div *ngIf="f.first_name.errors.required">First name is required</div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="last_name">Last Name</label>
-                    <input type="text" class="form-control" formControlName="last_name" placeholder="Enter Last Name" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }">
+                    <input type="text" class="form-control" formControlName="last_name" placeholder="Enter Last Name"
+                        [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }">
                     <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
                         <div *ngIf="f.last_name.errors.required">Last name is required</div>
                     </div>
-                    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                        else.</small> -->
                 </div>
                 <div class="form-group">
                     <label for="phone">Phone</label>
-                    <input type="text" class="form-control" formControlName="phone" placeholder="Enter Phone" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
+                    <input type="text" class="form-control" formControlName="phone" placeholder="Enter Phone"
+                        [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
                     <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
                         <div *ngIf="f.phone.errors.required">Phone is required</div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="text" class="form-control" formControlName="email" placeholder="Enter Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                    <input type="text" class="form-control" formControlName="email" placeholder="Enter Email"
+                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
                     <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                         <div *ngIf="f.email.errors.required">Email is required</div>
                         <div *ngIf="f.email.errors.email">Please enter valid email</div>
@@ -80,7 +82,8 @@
                 <div class="form-group">
                     <label for="country">Country</label>
                     <select formControlName="country_id" class="form-control" #countrySelect
-                        (change)="onCountrySelect(countrySelect.value)" [ngClass]="{ 'is-invalid': submitted && f.country_id.errors }">
+                        (change)="onCountrySelect(countrySelect.value)"
+                        [ngClass]="{ 'is-invalid': submitted && f.country_id.errors }">
                         <option value="">Select Country</option>
                         <option *ngFor="let country of countries;" [value]="country._id">{{ country.country_name }}
                         </option>
@@ -92,7 +95,8 @@
                 <div class="form-group">
                     <label for="state">State</label>
                     <select formControlName="state_id" class="form-control" #stateSelect
-                    (change)="onStateSelect(stateSelect.value)" [ngClass]="{ 'is-invalid': submitted && f.state_id.errors }">
+                        (change)="onStateSelect(stateSelect.value)"
+                        [ngClass]="{ 'is-invalid': submitted && f.state_id.errors }">
                         <option value="">Select State</option>
                         <option *ngFor="let state of states;" [value]="state._id">{{ state.state_name }}
                         </option>
@@ -103,7 +107,8 @@
                 </div>
                 <div class="form-group">
                     <label for="city">City</label>
-                    <select formControlName="city_id" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.city_id.errors }">
+                    <select formControlName="city_id" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.city_id.errors }">
                         <option value="">Select City</option>
                         <option *ngFor="let city of cities;" [value]="city._id">{{ city.city_name }}
                         </option>
@@ -114,29 +119,35 @@
                 </div>
                 <div class="form-group">
                     <label for="pincode">Pincode</label>
-                    <input type="text" class="form-control" formControlName="pin_code" placeholder="Enter Pincode" [ngClass]="{ 'is-invalid': submitted && f.pin_code.errors }">
+                    <input type="text" class="form-control" formControlName="pin_code" placeholder="Enter Pincode"
+                        [ngClass]="{ 'is-invalid': submitted && f.pin_code.errors }">
                     <div *ngIf="submitted && f.pin_code.errors" class="invalid-feedback">
                         <div *ngIf="f.pin_code.errors.required">Pincode is required</div>
                     </div>
-                    <!-- <small formControlName="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                        else.</small> -->
                 </div>
                 <div class="form-group">
                     <label for="commision">Commision</label>
-                    <input type="number" min="0" max="100" class="form-control" formControlName="distributor_commision" placeholder="Enter Commision" [ngClass]="{ 'is-invalid': submitted && f.distributor_commision.errors }">
+                    <input type="number" min="0" max="100" class="form-control" formControlName="distributor_commision"
+                        placeholder="Enter Commision"
+                        [ngClass]="{ 'is-invalid': submitted && f.distributor_commision.errors }">
                     <div *ngIf="submitted && f.distributor_commision.errors" class="invalid-feedback">
                         <div *ngIf="f.distributor_commision.errors.required">Commision is required</div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="distributor_tax_details">Tax Details</label>
-                    <input type="text" class="form-control" formControlName="distributor_tax_details" placeholder="Enter Tax Details" [ngClass]="{ 'is-invalid': submitted && f.distributor_tax_details.errors }">
+                    <input type="text" class="form-control" formControlName="distributor_tax_details"
+                        placeholder="Enter Tax Details"
+                        [ngClass]="{ 'is-invalid': submitted && f.distributor_tax_details.errors }">
                     <div *ngIf="submitted && f.distributor_tax_details.errors" class="invalid-feedback">
                         <div *ngIf="f.distributor_tax_details.errors.required">Tax details is required</div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+            </div>
+        </ng-container>
+        <div *nzModalFooter>
+            <button class="btn btn-default btn-lg" (click)="handleCancel()">Cancel</button>&nbsp;
+            <button type="submit" (click)="onSubmit()" class="btn btn-primary btn-lg">Submit</button>
         </div>
-    </ng-container>
+    </form>
 </nz-modal>

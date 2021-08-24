@@ -1,11 +1,12 @@
 import { Component } from '@angular/core'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { first } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 import * as Reducers from 'src/app/store/reducers';
 import { Router, ActivatedRoute } from '@angular/router';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'vb-system-login',
@@ -16,8 +17,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class LoginComponent {
   form: FormGroup
   logo: String
-  authProvider: string = 'firebase'
-  loading: boolean = false
+  loading: boolean = false;
+
+  isSentOTP: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -25,15 +27,15 @@ export class LoginComponent {
     private authService: AuthService,
     private notification: NzNotificationService,
     private router: Router,
+    private commonService: CommonService
   ) {
     this.form = fb.group({
-      phone: ['7485454587', [Validators.required, Validators.minLength(4)]],
-      otp: ['322244', [Validators.required]],
+      phone: ['', [Validators.required]],
+      otp: ['']
     });
 
     this.store.pipe(select(Reducers.getSettings)).subscribe(state => {
       this.logo = state.logo
-      this.authProvider = state.authProvider
     })
 
     this.store.pipe(select(Reducers.getUser)).subscribe(state => {
@@ -48,11 +50,36 @@ export class LoginComponent {
     return this.form.controls.otp;
   }
 
+  sendOTO(): void {
+    this.phone.markAsDirty();
+    this.phone.updateValueAndValidity();
+
+    if (this.phone.invalid) {
+      return;
+    }
+
+    let phone: any = this.phone.value;
+
+    this.commonService.sendOTP({ phone }).pipe(first()).subscribe((response) => {
+      if (response.status === true) {
+        // Add OTP Validation
+        this.form.controls['otp'].setValidators(Validators.required);
+
+        this.isSentOTP = true;
+        this.notification.success('Success!', response.message);
+      } else {
+        this.notification.warning('Error!', response.message);
+      }
+    });
+  }
+
   submitForm(): void {
     this.phone.markAsDirty()
     this.phone.updateValueAndValidity()
     this.otp.markAsDirty()
     this.otp.updateValueAndValidity()
+
+    console.log(this.otp)
 
     if (this.phone.invalid || this.otp.invalid) {
       return
@@ -69,6 +96,7 @@ export class LoginComponent {
         this.notification.warning('Auth Failed', data.message);
       }
     }, (error) => {
+      console.log(error)
       this.loading = false;
       this.notification.warning('Auth Failed', null);
     });
