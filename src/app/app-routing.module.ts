@@ -14,6 +14,7 @@ import { LayoutMainComponent } from 'src/app/layouts/Main/main.component'
 // pages
 import { DashboardAlphaComponent } from './pages/dashboard/alpha/alpha.component'
 import { ListDistributorsComponent } from './components/distributors/list-distributors/list-distributors.component';
+import { MainDashboardComponent } from './components/dashboard/main-dashboard/main-dashboard.component';
 
 // VB:REPLACE-END:ROUTER-IMPORTS
 
@@ -33,7 +34,7 @@ const routes: Routes = [
       {
         path: 'dashboard',
         data: { title: 'Dashboards' },
-        component: DashboardAlphaComponent,
+        component: MainDashboardComponent,
       },
       {
         path: 'distributors',
@@ -81,4 +82,4 @@ const routes: Routes = [
   providers: [AppPreloader],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

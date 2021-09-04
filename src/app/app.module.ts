@@ -28,9 +28,13 @@ import { registerLocaleData } from '@angular/common'
 import { default as localeEn } from '@angular/common/locales/en'
 import { NZ_I18N, en_US as localeZorro } from 'ng-zorro-antd/i18n';
 import { NzTableModule } from 'ng-zorro-antd/table';
-import { NzModalModule } from 'ng-zorro-antd/modal'
-import { NzFormModule } from 'ng-zorro-antd/form'
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
+
 import { ListDistributorsComponent } from './components/distributors/list-distributors/list-distributors.component';
+import { MainDashboardComponent } from './components/dashboard/main-dashboard/main-dashboard.component';
 
 const LOCALE_PROVIDERS = [
   { provide: LOCALE_ID, useValue: 'en' },
@@ -39,7 +43,11 @@ const LOCALE_PROVIDERS = [
 registerLocaleData(localeEn, 'en')
 
 @NgModule({
-  declarations: [AppComponent, ListDistributorsComponent],
+  declarations: [
+    AppComponent,
+    ListDistributorsComponent,
+    MainDashboardComponent
+  ],
   imports: [
     HttpClientModule,
     BrowserModule,
@@ -74,6 +82,9 @@ registerLocaleData(localeEn, 'en')
 
     // Table
     NzTableModule,
+
+    // Multiselect Dropdown
+    NgMultiSelectDropDownModule.forRoot(),
   ],
   providers: [
     // auth services

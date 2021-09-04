@@ -43,7 +43,7 @@ export class ListDistributorsComponent implements OnInit {
     private authService: AuthService,
     private formBuilder: FormBuilder
   ) {
-    let user: any = authService.currentUserValue;
+    let user: any = this.authService.currentUserValue;
     this.currentUser = user.user;
   }
 
