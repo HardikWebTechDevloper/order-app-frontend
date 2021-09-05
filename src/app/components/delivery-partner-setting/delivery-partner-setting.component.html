@@ -1,1 +1,37 @@
-<p>delivery-partner-setting works!</p>
+<div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="pull-left">
+                        Delivery Partner
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="deliveryPartnerForm">
+                        <div class="form-group">
+                            <label for="partner_name">Partner Name</label>
+                            <input type="text" class="form-control" formControlName="partner_name"
+                                placeholder="Enter Partner Name"
+                                [ngClass]="{ 'is-invalid': submitted && f.partner_name.errors }">
+                            <div *ngIf="submitted && f.partner_name.errors" class="invalid-feedback">
+                                <div *ngIf="f.partner_name.errors.required">Partner name is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="api_key">API Key</label>
+                            <input type="text" class="form-control" formControlName="api_key"
+                                placeholder="Enter API Key" [ngClass]="{ 'is-invalid': submitted && f.api_key.errors }">
+                            <div *ngIf="submitted && f.api_key.errors" class="invalid-feedback">
+                                <div *ngIf="f.api_key.errors.required">API key is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-xl pull-right" (click)="onSubmit()">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -15,6 +15,7 @@ import { LayoutMainComponent } from 'src/app/layouts/Main/main.component'
 import { DashboardAlphaComponent } from './pages/dashboard/alpha/alpha.component'
 import { ListDistributorsComponent } from './components/distributors/list-distributors/list-distributors.component';
 import { MainDashboardComponent } from './components/dashboard/main-dashboard/main-dashboard.component';
+import { DeliveryPartnerSettingComponent } from './components/delivery-partner-setting/delivery-partner-setting.component';
 
 // VB:REPLACE-END:ROUTER-IMPORTS
 
@@ -40,6 +41,11 @@ const routes: Routes = [
         path: 'distributors',
         data: { title: 'Distributors' },
         component: ListDistributorsComponent,
+      },
+      {
+        path: 'delivery-partner',
+        data: { title: 'Delivery Partner' },
+        component: DeliveryPartnerSettingComponent,
       },
       // VB:REPLACE-END:ROUTER-CONFIG
     ],

@@ -72,4 +72,12 @@ export class CommonService {
     return this.http.post<any>(`${environment.API_URL}user/sendOTP`, request, { headers: this.options }).pipe(map((data) => { return data; }));
   }
 
+  getDeliveryPartner(request) {
+    return this.http.post<any>(`${environment.API_URL}brand/delivery/partner/get`, request, { headers: this.options }).pipe(map((data) => { return data; }));
+  }
+  
+  manageDeliveryPartner(request) {
+    return this.http.post<any>(`${environment.API_URL}brand/delivery/partner/manage`, request, { headers: this.options }).pipe(map((data) => { return data; }));
+  }
+
 }

@@ -32,9 +32,9 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
-
 import { ListDistributorsComponent } from './components/distributors/list-distributors/list-distributors.component';
 import { MainDashboardComponent } from './components/dashboard/main-dashboard/main-dashboard.component';
+import { DeliveryPartnerSettingComponent } from './components/delivery-partner-setting/delivery-partner-setting.component';
 
 const LOCALE_PROVIDERS = [
   { provide: LOCALE_ID, useValue: 'en' },
@@ -46,7 +46,8 @@ registerLocaleData(localeEn, 'en')
   declarations: [
     AppComponent,
     ListDistributorsComponent,
-    MainDashboardComponent
+    MainDashboardComponent,
+    DeliveryPartnerSettingComponent
   ],
   imports: [
     HttpClientModule,

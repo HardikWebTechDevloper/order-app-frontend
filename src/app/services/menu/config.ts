@@ -17,5 +17,11 @@ export const getMenuData: any[] = [
     url: '/distributors',
     icon: 'fe fe-users'
   },
+  {
+    title: 'Delivery Partner',
+    key: '62sqvc',
+    url: '/delivery-partner',
+    icon: 'fe fe-users'
+  },
   // VB:REPLACE-END:MENU-CONFIG
 ]
