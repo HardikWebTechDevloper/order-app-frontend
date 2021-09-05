@@ -23,6 +23,7 @@ export class ListDistributorsComponent implements OnInit {
   numberOfChecked = 0;
 
   isVisible = false;
+  isEditModalVisible = false;
   isConfirmLoading = false;
 
   countries: string[] = [];
@@ -34,6 +35,9 @@ export class ListDistributorsComponent implements OnInit {
 
   createDistributorForm: FormGroup;
   submitted = false;
+
+  editDistributorForm: FormGroup;
+  submittedEditForm = false;
 
   constructor(
     private commonService: CommonService,
@@ -63,10 +67,25 @@ export class ListDistributorsComponent implements OnInit {
       distributor_commision: ['', Validators.required],
       distributor_tax_details: ['', Validators.required]
     });
+
+    this.editDistributorForm = this.formBuilder.group({
+      user_id: [''],
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
+      city_id: ['', [Validators.required]],
+      state_id: ['', [Validators.required]],
+      country_id: ['', [Validators.required]],
+      pin_code: ['', Validators.required],
+      distributor_commision: ['', Validators.required],
+      distributor_tax_details: ['', Validators.required]
+    });
   }
 
   // convenience getter for easy access to form fields
   get f() { return this.createDistributorForm.controls; }
+
+  // convenience getter for easy access to form fields
+  get e() { return this.editDistributorForm.controls; }
 
   onSubmit() {
     this.submitted = true;
@@ -89,7 +108,29 @@ export class ListDistributorsComponent implements OnInit {
         this.notification.warning('Error!', response.message);
       }
     }, (error) => {
-      console.log(error)
+      this.notification.warning('Error!', "Something went wrong");
+    });
+  }
+
+  onSubmitEditForm() {
+    this.submittedEditForm = true;
+
+    // stop here if form is invalid
+    if (this.editDistributorForm.invalid) {
+      return;
+    }
+
+    let requestObj: any = this.editDistributorForm.value;
+
+    this.commonService.updateDistributor(requestObj).pipe(first()).subscribe((response) => {
+      if (response.status === true) {
+        this.isEditModalVisible = false;
+        this.getDistributorsList();
+        this.notification.success('Success!', response.message);
+      } else {
+        this.notification.warning('Error!', response.message);
+      }
+    }, (error) => {
       this.notification.warning('Error!', "Something went wrong");
     });
   }
@@ -204,6 +245,45 @@ export class ListDistributorsComponent implements OnInit {
 
   handleCancel(): void {
     this.isVisible = false;
+  }
+
+  showEditModal(distribution_id: any): void {
+    this.isEditModalVisible = true;
+
+    this.commonService.getUserByID({ user_id: distribution_id }).pipe(first()).subscribe((response) => {
+      if (response.status === true && response.data) {
+        let distributor = response.data;
+
+        this.editDistributorForm.setValue({
+          user_id: distributor._id,
+          first_name: distributor.first_name,
+          last_name: distributor.last_name,
+          country_id: distributor.country_id,
+          state_id: distributor.state_id,
+          city_id: distributor.city_id,
+          pin_code: distributor.pin_code,
+          distributor_commision: distributor.distributor_commision,
+          distributor_tax_details: distributor.distributor_tax_details
+        });
+
+        if(distributor.country_id){
+          this.getStatesList(distributor.country_id);
+        }
+
+        if(distributor.state_id){
+          this.getCitiesList(distributor.state_id);
+        }
+
+        this.getCountriesList();
+      } else {
+        this.notification.warning('Error!', response.message);
+      }
+    });
+
+  }
+
+  handleEditModalCancel(): void {
+    this.isEditModalVisible = false;
   }
 }
 

@@ -31,7 +31,9 @@
                                 <td>{{ data.pin_code }}</td>
                                 <td>{{ data.distributor_commision }}</td>
                                 <td>
-                                    <button class="btn btn-primary btn-xs"><i class="fe fe-edit"></i></button>
+                                    <button class="btn btn-primary btn-xs" (click)="showEditModal(data._id)">
+                                        <i class="fe fe-edit"></i>
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>
@@ -42,6 +44,7 @@
     </div>
 </div>
 
+<!-- Start Here, For Create Distributor -->
 <nz-modal [(nzVisible)]="isVisible" nzTitle="Create Distributor" (nzOnCancel)="handleCancel()">
     <form [formGroup]="createDistributorForm">
         <ng-container *nzModalContent>
@@ -151,3 +154,100 @@
         </div>
     </form>
 </nz-modal>
+<!-- End Here, For Create Distributor -->
+
+<!-- Start Here, For Edit Distributor -->
+<nz-modal [(nzVisible)]="isEditModalVisible" nzTitle="Edit Distributor" (nzOnCancel)="handleEditModalCancel()">
+    <form [formGroup]="editDistributorForm">
+        <ng-container *nzModalContent>
+            <div>
+                <div class="form-group">
+                    <label for="first_name">First Name</label>
+                    <input type="text" class="form-control" formControlName="first_name" placeholder="Enter First Name"
+                        [ngClass]="{ 'is-invalid': submittedEditForm && e.first_name.errors }">
+                    <div *ngIf="submittedEditForm && e.first_name.errors" class="invalid-feedback">
+                        <div *ngIf="e.first_name.errors.required">First name is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" class="form-control" formControlName="last_name" placeholder="Enter Last Name"
+                        [ngClass]="{ 'is-invalid': submittedEditForm && e.last_name.errors }">
+                    <div *ngIf="submittedEditForm && e.last_name.errors" class="invalid-feedback">
+                        <div *ngIf="e.last_name.errors.required">Last name is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <select formControlName="country_id" class="form-control" #countrySelect
+                        (change)="onCountrySelect(countrySelect.value)"
+                        [ngClass]="{ 'is-invalid': submittedEditForm && e.country_id.errors }">
+                        <option value="">Select Country</option>
+                        <option *ngFor="let country of countries;" [value]="country._id">{{ country.country_name }}
+                        </option>
+                    </select>
+                    <div *ngIf="submittedEditForm && e.country_id.errors" class="invalid-feedback">
+                        <div *ngIf="e.country_id.errors.required">Please select any country</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <select formControlName="state_id" class="form-control" #stateSelect
+                        (change)="onStateSelect(stateSelect.value)"
+                        [ngClass]="{ 'is-invalid': submittedEditForm && e.state_id.errors }">
+                        <option value="">Select State</option>
+                        <option *ngFor="let state of states;" [value]="state._id">{{ state.state_name }}
+                        </option>
+                    </select>
+                    <div *ngIf="submittedEditForm && e.state_id.errors" class="invalid-feedback">
+                        <div *ngIf="e.state_id.errors.required">Please select any state</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <select formControlName="city_id" class="form-control"
+                        [ngClass]="{ 'is-invalid': submittedEditForm && e.city_id.errors }">
+                        <option value="">Select City</option>
+                        <option *ngFor="let city of cities;" [value]="city._id">{{ city.city_name }}
+                        </option>
+                    </select>
+                    <div *ngIf="submittedEditForm && e.city_id.errors" class="invalid-feedback">
+                        <div *ngIf="e.city_id.errors.required">Please select any city</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pincode">Pincode</label>
+                    <input type="text" class="form-control" formControlName="pin_code" placeholder="Enter Pincode"
+                        [ngClass]="{ 'is-invalid': submittedEditForm && e.pin_code.errors }">
+                    <div *ngIf="submittedEditForm && e.pin_code.errors" class="invalid-feedback">
+                        <div *ngIf="e.pin_code.errors.required">Pincode is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="commision">Commision</label>
+                    <input type="number" min="0" max="100" class="form-control" formControlName="distributor_commision"
+                        placeholder="Enter Commision"
+                        [ngClass]="{ 'is-invalid': submittedEditForm && e.distributor_commision.errors }">
+                    <div *ngIf="submittedEditForm && e.distributor_commision.errors" class="invalid-feedback">
+                        <div *ngIf="e.distributor_commision.errors.required">Commision is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="distributor_tax_details">Tax Details</label>
+                    <input type="text" class="form-control" formControlName="distributor_tax_details"
+                        placeholder="Enter Tax Details"
+                        [ngClass]="{ 'is-invalid': submittedEditForm && e.distributor_tax_details.errors }">
+                    <div *ngIf="submittedEditForm && e.distributor_tax_details.errors" class="invalid-feedback">
+                        <div *ngIf="e.distributor_tax_details.errors.required">Tax details is required</div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <div *nzModalFooter>
+            <button class="btn btn-default btn-lg" (click)="handleEditModalCancel()">Cancel</button>&nbsp;
+            <button type="submit" (click)="onSubmitEditForm()" class="btn btn-primary btn-lg">Submit</button>
+        </div>
+    </form>
+    Models Open
+</nz-modal>
+<!-- End Here, For Edit Distributor -->

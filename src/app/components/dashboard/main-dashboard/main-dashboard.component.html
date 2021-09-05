@@ -8,8 +8,9 @@
                             <h3>Orders</h3>
                         </div>
                         <div class="col-md-5">
-                            <ng-multiselect-dropdown [placeholder]="'Select Distributors'" [settings]="dropdownSettings"
-                                [data]="dropdownList" [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
+                            <ng-multiselect-dropdown [placeholder]="'Select Distributors'"
+                                [settings]="distributorDropdownSettings" [data]="distributorList"
+                                [(ngModel)]="selectedDistributors" (onSelect)="onItemSelect($event)"
                                 (onDeSelect)="onItemDeSelect($event)">
                             </ng-multiselect-dropdown>
                         </div>
@@ -45,49 +46,46 @@
             </div>
         </div>
 
-        <!-- <div class="col-lg-12">
+        <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-7">
-                            <h3>Distributor Transaction</h3>
+                            <h3>Distributor Transactions</h3>
                         </div>
                         <div class="col-md-5">
-                            <ng-multiselect-dropdown [placeholder]="'Select Distributors'" [settings]="dropdownSettings"
-                                [data]="dropdownList" [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
-                                (onDeSelect)="onItemDeSelect($event)">
-                            </ng-multiselect-dropdown>
+                            <select class="form-control form-select" aria-label="Default select example" #distributorSelect (change)="selectedDistributor(distributorSelect.value)">
+                                <option value="">Select Distributor</option>
+                                <option *ngFor="let distributor of distributorList;" [value]="distributor.item_id">{{ distributor.item_text }}</option>
+                            </select>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <nz-table #rowSelectionTable nzShowPagination nzShowSizeChanger [nzData]="listOfAllData"
-                        (nzCurrentPageDataChange)="currentPageDataChange($event)" class="vb__utils__table mb-4">
+                    <nz-table #transactionTable nzShowPagination nzShowSizeChanger [nzData]="listOfAllTransactionData"
+                        (nzCurrentPageDataChange)="currentPageTransactionDataChange($event)"
+                        class="vb__utils__table mb-4">
                         <thead>
                             <tr>
-                                <th>Customer Name</th>
+                                <th>Distributor Name</th>
                                 <th>Amount (INR)</th>
-                                <th>Pincode</th>
-                                <th>Status</th>
-                                <th>Delivery By</th>
+                                <th>Type</th>
                                 <th>Created At</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let data of rowSelectionTable.data">
-                                <td>{{ parseOrderDetails('Name', data.order_details) }}</td>
+                            <tr *ngFor="let data of transactionTable.data">
+                                <td>{{ data.distributor_name }}</td>
                                 <td>{{ data.amount }}</td>
-                                <td>{{ data.pincode }}</td>
                                 <td>
-                                    <span class="badge bg-dark text-white">{{data.order_status}}</span>
+                                    <span class="badge bg-dark text-white">{{data.type}}</span>
                                 </td>
-                                <td>{{ data.deliver_by }}</td>
-                                <td>{{ data.order_datetime | date: 'MMM d y h:mm a'}}</td>
+                                <td>{{ data.created_at | date: 'MMM d y h:mm a'}}</td>
                             </tr>
                         </tbody>
                     </nz-table>
                 </div>
             </div>
-        </div> -->
+        </div>
     </div>
 </div>

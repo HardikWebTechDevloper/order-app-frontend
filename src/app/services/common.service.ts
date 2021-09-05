@@ -30,6 +30,15 @@ export class CommonService {
     let brand_user_id: any = this.currentUser._id;
     return this.http.post<any>(`${environment.API_URL}user/distributor/get`, { "brand_user_id": brand_user_id }).pipe(map((data) => { return data; }));
   }
+  
+  getDistributorsTransactions(request: any) {
+    return this.http.post<any>(`${environment.API_URL}order/distributor/transactions/get`, request).pipe(map((data) => { return data; }));
+  }
+  
+  // Request: user_id
+  getUserByID(request: any) {
+    return this.http.post<any>(`${environment.API_URL}user/get/by/id`, request).pipe(map((data) => { return data; }));
+  }
 
   getBrandOrdersList(request: any) {
     return this.http.post<any>(`${environment.API_URL}order/brand/get`, request).pipe(map((data) => { return data; }));
@@ -53,6 +62,10 @@ export class CommonService {
 
   createDistributor(request) {
     return this.http.post<any>(`${environment.API_URL}user/distributor/create`, request, { headers: this.options }).pipe(map((data) => { return data; }));
+  }
+
+  updateDistributor(request) {
+    return this.http.post<any>(`${environment.API_URL}user/distributor/update`, request, { headers: this.options }).pipe(map((data) => { return data; }));
   }
 
   sendOTP(request) {
