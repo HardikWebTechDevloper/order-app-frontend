@@ -39,6 +39,11 @@ export class CommonService {
   getUserByID(request: any) {
     return this.http.post<any>(`${environment.API_URL}user/get/by/id`, request).pipe(map((data) => { return data; }));
   }
+  
+  // Request: user_id
+  getDistributorPincodes(request: any) {
+    return this.http.post<any>(`${environment.API_URL}user/get/pincodes`, request).pipe(map((data) => { return data; }));
+  }
 
   getBrandOrdersList(request: any) {
     return this.http.post<any>(`${environment.API_URL}order/brand/get`, request).pipe(map((data) => { return data; }));

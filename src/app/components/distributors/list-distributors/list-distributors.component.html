@@ -146,6 +146,25 @@
                         <div *ngIf="f.distributor_tax_details.errors.required">Tax details is required</div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="covered_pincode">Covered Pincode</label>
+
+                    <div class="row">
+                        <div class="col-md-3 mt-2" *ngFor="let value of covered_pincode_item; let i = index">
+                            <input type="text" class="form-control" [(ngModel)]="value.value" #name="ngModel"
+                                [ngModelOptions]="{standalone: true}">&nbsp;
+                            <button class="btn btn-danger" (click)="removevalue(i)">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+
+                        <div class="col-md-3 mt-2">
+                            <button type="button" (click)="addvalue()" class="btn btn-success">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </ng-container>
         <div *nzModalFooter>
@@ -239,6 +258,26 @@
                         [ngClass]="{ 'is-invalid': submittedEditForm && e.distributor_tax_details.errors }">
                     <div *ngIf="submittedEditForm && e.distributor_tax_details.errors" class="invalid-feedback">
                         <div *ngIf="e.distributor_tax_details.errors.required">Tax details is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="covered_pincode">Covered Pincode</label>
+
+                    <div class="row">
+                        {{print(saved_covered_pincode_item)}}
+                        <div class="col-md-3 mt-2" *ngFor="let value of saved_covered_pincode_item; let i = index">
+                            <input type="text" class="form-control" [(ngModel)]="value.value" #name="ngModel"
+                                [ngModelOptions]="{standalone: true}">&nbsp;
+                            <button class="btn btn-danger" (click)="removeEditedPincodevalue(i)">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+
+                        <div class="col-md-3 mt-2">
+                            <button type="button" (click)="addEditedPincodeValue()" class="btn btn-success">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

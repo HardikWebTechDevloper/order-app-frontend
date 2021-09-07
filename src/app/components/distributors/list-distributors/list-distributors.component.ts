@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { AuthService } from 'src/app/services/auth.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-list-distributors',
@@ -39,6 +39,9 @@ export class ListDistributorsComponent implements OnInit {
   editDistributorForm: FormGroup;
   submittedEditForm = false;
 
+  covered_pincode_item: any = [];
+  saved_covered_pincode_item: any = [];
+
   constructor(
     private commonService: CommonService,
     private router: Router,
@@ -56,16 +59,16 @@ export class ListDistributorsComponent implements OnInit {
     this.getRoles();
 
     this.createDistributorForm = this.formBuilder.group({
-      first_name: ['', Validators.required],
-      last_name: ['', Validators.required],
-      phone: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      first_name: ['Mark', Validators.required],
+      last_name: ['Wood', Validators.required],
+      phone: ['9879879877', Validators.required],
+      email: ['mark.wood@yopmail.com', [Validators.required, Validators.email]],
       city_id: ['', [Validators.required]],
       state_id: ['', [Validators.required]],
-      country_id: ['', [Validators.required]],
-      pin_code: ['', Validators.required],
-      distributor_commision: ['', Validators.required],
-      distributor_tax_details: ['', Validators.required]
+      country_id: ['1', [Validators.required]],
+      pin_code: ['1231231', Validators.required],
+      distributor_commision: ['2', Validators.required],
+      distributor_tax_details: ['1231231231', Validators.required]
     });
 
     this.editDistributorForm = this.formBuilder.group({
@@ -81,6 +84,22 @@ export class ListDistributorsComponent implements OnInit {
     });
   }
 
+  removevalue(i) {
+    this.covered_pincode_item.splice(i, 1);
+  }
+
+  addvalue() {
+    this.covered_pincode_item.push({ value: "" });
+  }
+
+  addEditedPincodeValue() {
+    this.saved_covered_pincode_item.push({ value: "" });
+  }
+
+  removeEditedPincodevalue(i) {
+    this.saved_covered_pincode_item.splice(i, 1);
+  }
+
   // convenience getter for easy access to form fields
   get f() { return this.createDistributorForm.controls; }
 
@@ -90,6 +109,16 @@ export class ListDistributorsComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
+    if (this.covered_pincode_item && this.covered_pincode_item.length == 0) {
+      this.notification.error('Validation Error!', "Please add atleast one pincode for covered pincode.");
+      return;
+    }
+
+    if (this.covered_pincode_item && this.covered_pincode_item.length > 0 && this.covered_pincode_item[0].value == '') {
+      this.notification.error('Validation Error!', "Please add atleast one pincode for covered pincode.");
+      return;
+    }
+
     // stop here if form is invalid
     if (this.createDistributorForm.invalid) {
       return;
@@ -98,6 +127,7 @@ export class ListDistributorsComponent implements OnInit {
     let requestObj: any = this.createDistributorForm.value;
     requestObj.role_id = this.role_id;
     requestObj.brand_user_id = this.currentUser._id;
+    requestObj.covered_pincode = this.covered_pincode_item.map(item => item.value);
 
     this.commonService.createDistributor(requestObj).pipe(first()).subscribe((response) => {
       if (response.status === true) {
@@ -115,12 +145,23 @@ export class ListDistributorsComponent implements OnInit {
   onSubmitEditForm() {
     this.submittedEditForm = true;
 
+    if (this.saved_covered_pincode_item && this.saved_covered_pincode_item.length == 0) {
+      this.notification.error('Validation Error!', "Please add atleast one pincode for covered pincode.");
+      return;
+    }
+
+    if (this.saved_covered_pincode_item && this.saved_covered_pincode_item.length > 0 && this.saved_covered_pincode_item[0].value == '') {
+      this.notification.error('Validation Error!', "Please add atleast one pincode for covered pincode.");
+      return;
+    }
+
     // stop here if form is invalid
     if (this.editDistributorForm.invalid) {
       return;
     }
 
     let requestObj: any = this.editDistributorForm.value;
+    requestObj.covered_pincode = this.saved_covered_pincode_item.map(item => item.value);
 
     this.commonService.updateDistributor(requestObj).pipe(first()).subscribe((response) => {
       if (response.status === true) {
@@ -254,6 +295,8 @@ export class ListDistributorsComponent implements OnInit {
       if (response.status === true && response.data) {
         let distributor = response.data;
 
+        this.getDistributorsPincode(distribution_id);
+
         this.editDistributorForm.setValue({
           user_id: distributor._id,
           first_name: distributor.first_name,
@@ -266,11 +309,11 @@ export class ListDistributorsComponent implements OnInit {
           distributor_tax_details: distributor.distributor_tax_details
         });
 
-        if(distributor.country_id){
+        if (distributor.country_id) {
           this.getStatesList(distributor.country_id);
         }
 
-        if(distributor.state_id){
+        if (distributor.state_id) {
           this.getCitiesList(distributor.state_id);
         }
 
@@ -279,11 +322,30 @@ export class ListDistributorsComponent implements OnInit {
         this.notification.warning('Error!', response.message);
       }
     });
+  }
 
+  getDistributorsPincode(distribution_id: any) {
+    this.commonService.getDistributorPincodes({ user_id: distribution_id }).pipe(first()).subscribe((response) => {
+      if (response.status === true && response.data && response.data.length > 0) {
+        let pincodes: any = [];
+        response.data.map((data: any) => {
+          let element = {
+            value: data.pin_code
+          };
+
+          pincodes.push(element);
+        });
+        this.saved_covered_pincode_item = pincodes;
+      }
+    });
   }
 
   handleEditModalCancel(): void {
     this.isEditModalVisible = false;
+  }
+
+  print(value) {
+    console.log(value);
   }
 }
 
