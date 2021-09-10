@@ -264,7 +264,6 @@
                     <label for="covered_pincode">Covered Pincode</label>
 
                     <div class="row">
-                        {{print(saved_covered_pincode_item)}}
                         <div class="col-md-3 mt-2" *ngFor="let value of saved_covered_pincode_item; let i = index">
                             <input type="text" class="form-control" [(ngModel)]="value.value" #name="ngModel"
                                 [ngModelOptions]="{standalone: true}">&nbsp;

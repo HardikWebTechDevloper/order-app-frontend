@@ -343,10 +343,6 @@ export class ListDistributorsComponent implements OnInit {
   handleEditModalCancel(): void {
     this.isEditModalVisible = false;
   }
-
-  print(value) {
-    console.log(value);
-  }
 }
 
 export interface Data {
