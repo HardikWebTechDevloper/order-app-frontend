@@ -17,29 +17,31 @@ export class CommonService {
   constructor(private http: HttpClient, private authService: AuthService) {
     let authenticatedUser: any = this.authService.currentUserValue;
 
-    this.token = authenticatedUser.token;
-    this.currentUser = authenticatedUser.user;
+    if (authenticatedUser && authenticatedUser.token) {
+      this.token = authenticatedUser.token;
+      this.currentUser = authenticatedUser.user;
 
-    let httpHeaders = new HttpHeaders();
-    httpHeaders = httpHeaders.append('Authorization', 'Bearer ' + this.token);
+      let httpHeaders = new HttpHeaders();
+      httpHeaders = httpHeaders.append('Authorization', 'Bearer ' + this.token);
 
-    this.options = { headers: httpHeaders };
+      this.options = { headers: httpHeaders };
+    }
   }
 
   getDistributorsList() {
     let brand_user_id: any = this.currentUser._id;
     return this.http.post<any>(`${environment.API_URL}user/distributor/get`, { "brand_user_id": brand_user_id }).pipe(map((data) => { return data; }));
   }
-  
+
   getDistributorsTransactions(request: any) {
     return this.http.post<any>(`${environment.API_URL}order/distributor/transactions/get`, request).pipe(map((data) => { return data; }));
   }
-  
+
   // Request: user_id
   getUserByID(request: any) {
     return this.http.post<any>(`${environment.API_URL}user/get/by/id`, request).pipe(map((data) => { return data; }));
   }
-  
+
   // Request: user_id
   getDistributorPincodes(request: any) {
     return this.http.post<any>(`${environment.API_URL}user/get/pincodes`, request).pipe(map((data) => { return data; }));
@@ -80,7 +82,7 @@ export class CommonService {
   getDeliveryPartner(request) {
     return this.http.post<any>(`${environment.API_URL}brand/delivery/partner/get`, request, { headers: this.options }).pipe(map((data) => { return data; }));
   }
-  
+
   manageDeliveryPartner(request) {
     return this.http.post<any>(`${environment.API_URL}brand/delivery/partner/manage`, request, { headers: this.options }).pipe(map((data) => { return data; }));
   }

@@ -46,11 +46,9 @@ export class MainDashboardComponent implements OnInit {
     private notification: NzNotificationService,
     private authService: AuthService
   ) {
-    let user: any = this.authService.currentUserValue;
-    this.currentUser = user.user;
-
-    this.orderRequest.brand_user_id = this.currentUser._id;
-    this.transactionRequest.brand_user_id = this.currentUser._id;
+    let userInfo: any = JSON.parse(localStorage.getItem('currentUser'));
+    this.orderRequest.brand_user_id = userInfo.user._id;
+    this.transactionRequest.brand_user_id = userInfo.user._id;
   }
 
   ngOnInit(): void {

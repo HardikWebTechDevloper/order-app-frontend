@@ -74,12 +74,10 @@ export class LoginComponent {
   }
 
   submitForm(): void {
-    this.phone.markAsDirty()
-    this.phone.updateValueAndValidity()
-    this.otp.markAsDirty()
-    this.otp.updateValueAndValidity()
-
-    console.log(this.otp)
+    this.phone.markAsDirty();
+    this.phone.updateValueAndValidity();
+    this.otp.markAsDirty();
+    this.otp.updateValueAndValidity();
 
     if (this.phone.invalid || this.otp.invalid) {
       return
@@ -91,12 +89,11 @@ export class LoginComponent {
     this.authService.login(phone, otp).pipe(first()).subscribe((data) => {
       if (data.status === true) {
         this.notification.success('Logged In', 'You have successfully logged in!');
-        this.router.navigate(['/'])
+        this.router.navigate(['/dashboard'])
       } else {
         this.notification.warning('Auth Failed', data.message);
       }
     }, (error) => {
-      console.log(error)
       this.loading = false;
       this.notification.warning('Auth Failed', null);
     });

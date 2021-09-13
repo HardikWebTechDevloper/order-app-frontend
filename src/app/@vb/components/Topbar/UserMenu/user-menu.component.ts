@@ -24,6 +24,9 @@ export class TopbarUserMenuComponent {
     public router: Router,
     public cf: ChangeDetectorRef
   ) {
+    let currentUserValue: any = JSON.parse(localStorage.getItem('currentUser'));
+    this.currentUser = currentUserValue.user;
+
     this.store.pipe(select(Reducers.getUser)).subscribe(state => {
       this.name = state.name
       this.role = state.role
@@ -34,15 +37,6 @@ export class TopbarUserMenuComponent {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-  }
-
-  ngAfterViewInit(): void {
-    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-    //Add 'implements AfterViewInit' to the class.
-
-    let currentUserValue: any = this.authService.currentUserValue;
-    this.currentUser = currentUserValue.user;
-    this.cf.detectChanges();
   }
 
   logout() {

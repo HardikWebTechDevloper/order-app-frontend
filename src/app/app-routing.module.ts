@@ -21,9 +21,10 @@ import { DeliveryPartnerSettingComponent } from './components/delivery-partner-s
 
 const routes: Routes = [
   {
-    path: '',
     // VB:REPLACE-NEXT-LINE:ROUTER-REDIRECT
-    redirectTo: 'dashboard',
+    path: '',
+    data: { title: 'Dashboards' },
+    component: MainDashboardComponent,
     pathMatch: 'full',
   },
   {

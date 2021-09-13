@@ -27,7 +27,7 @@ export class DeliveryPartnerSettingComponent implements OnInit {
     private authService: AuthService,
     private formBuilder: FormBuilder
   ) {
-    let user: any = this.authService.currentUserValue;
+    let user: any = JSON.parse(localStorage.getItem('currentUser'));
     this.currentUser = user.user;
   }
 
