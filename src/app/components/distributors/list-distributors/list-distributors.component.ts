@@ -59,16 +59,16 @@ export class ListDistributorsComponent implements OnInit {
     this.getRoles();
 
     this.createDistributorForm = this.formBuilder.group({
-      first_name: ['Mark', Validators.required],
-      last_name: ['Wood', Validators.required],
-      phone: ['9879879877', Validators.required],
-      email: ['mark.wood@yopmail.com', [Validators.required, Validators.email]],
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
+      phone: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       city_id: ['', [Validators.required]],
       state_id: ['', [Validators.required]],
-      country_id: ['1', [Validators.required]],
-      pin_code: ['1231231', Validators.required],
-      distributor_commision: ['2', Validators.required],
-      distributor_tax_details: ['1231231231', Validators.required]
+      country_id: ['', [Validators.required]],
+      pin_code: ['', Validators.required],
+      distributor_commision: ['', Validators.required],
+      distributor_tax_details: ['', Validators.required]
     });
 
     this.editDistributorForm = this.formBuilder.group({
@@ -296,6 +296,8 @@ export class ListDistributorsComponent implements OnInit {
         let distributor = response.data;
 
         this.getDistributorsPincode(distribution_id);
+
+        console.log(distributor)
 
         this.editDistributorForm.setValue({
           user_id: distributor._id,
