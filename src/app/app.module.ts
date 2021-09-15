@@ -35,6 +35,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ListDistributorsComponent } from './components/distributors/list-distributors/list-distributors.component';
 import { MainDashboardComponent } from './components/dashboard/main-dashboard/main-dashboard.component';
 import { DeliveryPartnerSettingComponent } from './components/delivery-partner-setting/delivery-partner-setting.component';
+import { AllOrdersComponent } from './components/reports/all-orders/all-orders.component';
+import { TransactionHistoriesComponent } from './components/reports/transaction-histories/transaction-histories.component';
 
 const LOCALE_PROVIDERS = [
   { provide: LOCALE_ID, useValue: 'en' },
@@ -47,7 +49,9 @@ registerLocaleData(localeEn, 'en')
     AppComponent,
     ListDistributorsComponent,
     MainDashboardComponent,
-    DeliveryPartnerSettingComponent
+    DeliveryPartnerSettingComponent,
+    AllOrdersComponent,
+    TransactionHistoriesComponent
   ],
   imports: [
     HttpClientModule,

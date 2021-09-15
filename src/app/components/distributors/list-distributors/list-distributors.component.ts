@@ -89,11 +89,11 @@ export class ListDistributorsComponent implements OnInit {
   }
 
   addvalue() {
-    this.covered_pincode_item.push({ value: "" });
+    this.covered_pincode_item.push({ value: '' });
   }
 
   addEditedPincodeValue() {
-    this.saved_covered_pincode_item.push({ value: "" });
+    this.saved_covered_pincode_item.push({ value: '' });
   }
 
   removeEditedPincodevalue(i) {
@@ -127,7 +127,10 @@ export class ListDistributorsComponent implements OnInit {
     let requestObj: any = this.createDistributorForm.value;
     requestObj.role_id = this.role_id;
     requestObj.brand_user_id = this.currentUser._id;
-    requestObj.covered_pincode = this.covered_pincode_item.map(item => item.value);
+
+    let covered_pincode = this.covered_pincode_item.map(item => parseInt(item.value));
+    covered_pincode = covered_pincode.filter((item, i, ar) => ar.indexOf(item) == i);
+    requestObj.covered_pincode = covered_pincode;
 
     this.commonService.createDistributor(requestObj).pipe(first()).subscribe((response) => {
       if (response.status === true) {
@@ -161,7 +164,11 @@ export class ListDistributorsComponent implements OnInit {
     }
 
     let requestObj: any = this.editDistributorForm.value;
-    requestObj.covered_pincode = this.saved_covered_pincode_item.map(item => item.value);
+
+    
+    let covered_pincode = this.saved_covered_pincode_item.map(item => parseInt(item.value));
+    covered_pincode = covered_pincode.filter((item, i, ar) => ar.indexOf(item) == i);
+    requestObj.covered_pincode = covered_pincode;
 
     this.commonService.updateDistributor(requestObj).pipe(first()).subscribe((response) => {
       if (response.status === true) {
@@ -289,17 +296,12 @@ export class ListDistributorsComponent implements OnInit {
   }
 
   showEditModal(distribution_id: any): void {
-    this.isEditModalVisible = true;
-
     this.commonService.getUserByID({ user_id: distribution_id }).pipe(first()).subscribe((response) => {
       if (response.status === true && response.data) {
         let distributor = response.data;
-
         this.getDistributorsPincode(distribution_id);
 
-        console.log(distributor)
-
-        this.editDistributorForm.setValue({
+        this.editDistributorForm.patchValue({
           user_id: distributor._id,
           first_name: distributor.first_name,
           last_name: distributor.last_name,
@@ -311,15 +313,11 @@ export class ListDistributorsComponent implements OnInit {
           distributor_tax_details: distributor.distributor_tax_details
         });
 
-        if (distributor.country_id) {
-          this.getStatesList(distributor.country_id);
-        }
-
-        if (distributor.state_id) {
-          this.getCitiesList(distributor.state_id);
-        }
+        this.getStatesList(distributor.country_id);
+        this.getCitiesList(distributor.state_id);
 
         this.getCountriesList();
+        this.isEditModalVisible = true;
       } else {
         this.notification.warning('Error!', response.message);
       }

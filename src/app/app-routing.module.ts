@@ -16,6 +16,8 @@ import { DashboardAlphaComponent } from './pages/dashboard/alpha/alpha.component
 import { ListDistributorsComponent } from './components/distributors/list-distributors/list-distributors.component';
 import { MainDashboardComponent } from './components/dashboard/main-dashboard/main-dashboard.component';
 import { DeliveryPartnerSettingComponent } from './components/delivery-partner-setting/delivery-partner-setting.component';
+import { AllOrdersComponent } from './components/reports/all-orders/all-orders.component';
+import { TransactionHistoriesComponent } from './components/reports/transaction-histories/transaction-histories.component';
 
 // VB:REPLACE-END:ROUTER-IMPORTS
 
@@ -48,7 +50,34 @@ const routes: Routes = [
         data: { title: 'Delivery Partner' },
         component: DeliveryPartnerSettingComponent,
       },
+      {
+        path: 'report/orders',
+        data: { title: 'Total Orders' },
+        component: AllOrdersComponent,
+      },
+      {
+        path: 'report/transaction-history',
+        data: { title: 'Transaction History' },
+        component: TransactionHistoriesComponent,
+      }
       // VB:REPLACE-END:ROUTER-CONFIG
+    ],
+  },
+  {
+    path: 'report',
+    component: LayoutMainComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'orders',
+        data: { title: 'Total Orders' },
+        component: AllOrdersComponent,
+      },
+      {
+        path: 'transaction-history',
+        data: { title: 'Transaction History' },
+        component: TransactionHistoriesComponent,
+      }
     ],
   },
   {

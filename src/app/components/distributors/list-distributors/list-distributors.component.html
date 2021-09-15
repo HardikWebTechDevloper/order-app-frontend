@@ -150,12 +150,10 @@
                     <label for="covered_pincode">Covered Pincode</label>
 
                     <div class="row">
-                        <div class="col-md-3 mt-2" *ngFor="let value of covered_pincode_item; let i = index">
+                        <div class="col-md-3 mt-2 inline-box" *ngFor="let value of covered_pincode_item; let i = index">
                             <input type="text" class="form-control" [(ngModel)]="value.value" #name="ngModel"
                                 [ngModelOptions]="{standalone: true}">&nbsp;
-                            <button class="btn btn-danger" (click)="removevalue(i)">
-                                <i class="fa fa-times"></i>
-                            </button>
+                                <a (click)="removevalue(i)"> <i class="fa fa-times icon-color"></i></a>
                         </div>
 
                         <div class="col-md-3 mt-2">
@@ -211,6 +209,7 @@
                 </div>
                 <div class="form-group">
                     <label for="state">State</label>
+                    {{e.state_id.value}}
                     <select formControlName="state_id" class="form-control" #stateSelect
                         (change)="onStateSelect(stateSelect.value)"
                         [ngClass]="{ 'is-invalid': submittedEditForm && e.state_id.errors }">
@@ -224,6 +223,7 @@
                 </div>
                 <div class="form-group">
                     <label for="city">City</label>
+                    {{e.city_id.value}}
                     <select formControlName="city_id" class="form-control"
                         [ngClass]="{ 'is-invalid': submittedEditForm && e.city_id.errors }">
                         <option value="">Select City</option>
@@ -264,12 +264,14 @@
                     <label for="covered_pincode">Covered Pincode</label>
 
                     <div class="row">
-                        <div class="col-md-3 mt-2" *ngFor="let value of saved_covered_pincode_item; let i = index">
+                        <div class="col-md-3 mt-2 inline-box"
+                            *ngFor="let value of saved_covered_pincode_item; let i = index">
                             <input type="text" class="form-control" [(ngModel)]="value.value" #name="ngModel"
                                 [ngModelOptions]="{standalone: true}">&nbsp;
-                            <button class="btn btn-danger" (click)="removeEditedPincodevalue(i)">
+                            <a (click)="removeEditedPincodevalue()"> <i class="fa fa-times icon-color"></i></a>
+                            <!-- <button class="btn btn-danger" (click)="removeEditedPincodevalue(i)">
                                 <i class="fa fa-times"></i>
-                            </button>
+                            </button> -->
                         </div>
 
                         <div class="col-md-3 mt-2">
