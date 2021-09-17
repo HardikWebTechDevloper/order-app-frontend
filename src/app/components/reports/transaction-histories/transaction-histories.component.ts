@@ -6,6 +6,8 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { AuthService } from 'src/app/services/auth.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { NzTableFilterFn, NzTableFilterList, NzTableSortFn, NzTableSortOrder } from 'ng-zorro-antd/table';
+import { differenceInCalendarDays } from 'date-fns';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-transaction-histories',
@@ -28,6 +30,14 @@ export class TransactionHistoriesComponent implements OnInit {
   currentUser: any;
   orderRequest: any = {};
   transactionRequest: any = {};
+  brandRequest: any = {};
+
+  // Datepicker
+  dateFormat = 'yyyy/MM/dd';
+  monthFormat = 'yyyy/MM';
+
+  date = null;
+  today = new Date();
 
   constructor(
     private commonService: CommonService,
@@ -37,6 +47,7 @@ export class TransactionHistoriesComponent implements OnInit {
   ) {
     let userInfo: any = JSON.parse(localStorage.getItem('currentUser'));
     this.transactionRequest.brand_user_id = userInfo.user._id;
+    this.brandRequest.brand_user_id = userInfo.user._id;
   }
 
   ngOnInit(): void {
@@ -45,7 +56,7 @@ export class TransactionHistoriesComponent implements OnInit {
   }
 
   getDistributors(): void {
-    this.commonService.getDistributorsList().pipe(first()).subscribe((response) => {
+    this.commonService.getDistributorsList(this.brandRequest).pipe(first()).subscribe((response) => {
       if (response.status === true && response.data && response.data.length > 0) {
         this.distributorList = response.data.map((data: any) => {
           let element: any = {
@@ -114,6 +125,25 @@ export class TransactionHistoriesComponent implements OnInit {
 
   selectedDistributor(value: string): void {
     this.transactionRequest.distributor_id = value;
+
+    this.getDistributorsTransactions();
+  }
+
+  disabledDate = (current: Date): boolean =>
+    // Can not select days before today and today
+    differenceInCalendarDays(current, this.today) > 0;
+
+  onChangeDatePicker(result: Date[]): void {
+    if (result && result.length > 0) {
+      let startDate = moment(result[0]).format('YYYY-MM-DD');
+      let endDate = moment(result[1]).format('YYYY-MM-DD');
+
+      this.transactionRequest.start_date = startDate;
+      this.transactionRequest.end_date = endDate;
+    } else {
+      this.transactionRequest.start_date = "";
+      this.transactionRequest.end_date = "";
+    }
 
     this.getDistributorsTransactions();
   }

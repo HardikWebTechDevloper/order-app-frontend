@@ -5,6 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { AuthService } from 'src/app/services/auth.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { differenceInCalendarDays } from 'date-fns';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-all-orders',
@@ -29,6 +31,14 @@ export class AllOrdersComponent implements OnInit {
 
   currentUser: any;
   orderRequest: any = {};
+  brandRequest: any = {};
+
+  // Datepicker
+  dateFormat = 'yyyy/MM/dd';
+  monthFormat = 'yyyy/MM';
+
+  date = null;
+  today = new Date();
 
   constructor(
     private commonService: CommonService,
@@ -38,6 +48,7 @@ export class AllOrdersComponent implements OnInit {
   ) {
     let userInfo: any = JSON.parse(localStorage.getItem('currentUser'));
     this.orderRequest.brand_user_id = userInfo.user._id;
+    this.brandRequest.brand_user_id = userInfo.user._id;
   }
 
   ngOnInit(): void {
@@ -54,8 +65,13 @@ export class AllOrdersComponent implements OnInit {
     };
   }
 
+  disabledDate = (current: Date): boolean =>
+    // Can not select days before today and today
+    differenceInCalendarDays(current, this.today) > 0;
+
+
   getDistributors(): void {
-    this.commonService.getDistributorsList().pipe(first()).subscribe((response) => {
+    this.commonService.getDistributorsList(this.brandRequest).pipe(first()).subscribe((response) => {
       if (response.status === true && response.data && response.data.length > 0) {
         this.distributorList = response.data.map((data: any) => {
           let element: any = {
@@ -146,6 +162,20 @@ export class AllOrdersComponent implements OnInit {
     return columnValue;
   }
 
+  onChangeDatePicker(result: Date[]): void {
+    if (result && result.length > 0) {
+      let startDate = moment(result[0]).format('YYYY-MM-DD');
+      let endDate = moment(result[1]).format('YYYY-MM-DD');
+
+      this.orderRequest.start_date = startDate;
+      this.orderRequest.end_date = endDate;
+    } else {
+      this.orderRequest.start_date = "";
+      this.orderRequest.end_date = "";
+    }
+
+    this.getAllOrders();
+  }
 }
 
 export interface Data {

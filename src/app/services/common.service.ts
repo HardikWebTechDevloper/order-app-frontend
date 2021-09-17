@@ -28,9 +28,8 @@ export class CommonService {
     }
   }
 
-  getDistributorsList() {
-    let brand_user_id: any = this.currentUser._id;
-    return this.http.post<any>(`${environment.API_URL}user/distributor/get`, { "brand_user_id": brand_user_id }).pipe(map((data) => { return data; }));
+  getDistributorsList(request: any) {
+    return this.http.post<any>(`${environment.API_URL}user/distributor/get`, request).pipe(map((data) => { return data; }));
   }
 
   getDistributorsTransactions(request: any) {

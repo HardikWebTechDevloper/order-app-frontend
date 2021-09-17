@@ -6,6 +6,9 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { differenceInCalendarDays } from 'date-fns';
+import * as moment from 'moment';
+import { start } from 'repl';
 
 @Component({
   selector: 'app-list-distributors',
@@ -42,6 +45,15 @@ export class ListDistributorsComponent implements OnInit {
   covered_pincode_item: any = [];
   saved_covered_pincode_item: any = [];
 
+  // Datepicker
+  dateFormat = 'yyyy/MM/dd';
+  monthFormat = 'yyyy/MM';
+
+  date = null;
+  today = new Date();
+
+  distributorRequest: any = {};
+
   constructor(
     private commonService: CommonService,
     private router: Router,
@@ -52,6 +64,8 @@ export class ListDistributorsComponent implements OnInit {
   ) {
     let user: any = this.authService.currentUserValue;
     this.currentUser = user.user;
+
+    this.distributorRequest.brand_user_id = this.currentUser._id;
   }
 
   ngOnInit(): void {
@@ -165,7 +179,7 @@ export class ListDistributorsComponent implements OnInit {
 
     let requestObj: any = this.editDistributorForm.value;
 
-    
+
     let covered_pincode = this.saved_covered_pincode_item.map(item => parseInt(item.value));
     covered_pincode = covered_pincode.filter((item, i, ar) => ar.indexOf(item) == i);
     requestObj.covered_pincode = covered_pincode;
@@ -216,13 +230,11 @@ export class ListDistributorsComponent implements OnInit {
   }
 
   getDistributorsList(): void {
-    this.commonService.getDistributorsList().pipe(first()).subscribe((response) => {
+    this.commonService.getDistributorsList(this.distributorRequest).pipe(first()).subscribe((response) => {
       if (response.status === true && response.data && response.data.length > 0) {
         this.listOfAllData = response.data;
-        this.notification.success('Success!', response.message);
       } else {
         this.listOfAllData = [];
-        this.notification.warning('Error!', response.message);
       }
     }, (error) => {
       this.listOfAllData = [];
@@ -342,6 +354,25 @@ export class ListDistributorsComponent implements OnInit {
 
   handleEditModalCancel(): void {
     this.isEditModalVisible = false;
+  }
+
+  disabledDate = (current: Date): boolean =>
+    // Can not select days before today and today
+    differenceInCalendarDays(current, this.today) > 0;
+
+  onChangeDatePicker(result: Date[]): void {
+    if (result && result.length > 0) {
+      let startDate = moment(result[0]).format('YYYY-MM-DD');
+      let endDate = moment(result[1]).format('YYYY-MM-DD');
+
+      this.distributorRequest.start_date = startDate;
+      this.distributorRequest.end_date = endDate;
+    } else {
+      this.distributorRequest.start_date = "";
+      this.distributorRequest.end_date = "";
+    }
+
+    this.getDistributorsList();
   }
 }
 

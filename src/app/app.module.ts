@@ -31,6 +31,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
 import { ListDistributorsComponent } from './components/distributors/list-distributors/list-distributors.component';
 import { MainDashboardComponent } from './components/dashboard/main-dashboard/main-dashboard.component';
@@ -90,6 +91,9 @@ registerLocaleData(localeEn, 'en')
 
     // Multiselect Dropdown
     NgMultiSelectDropDownModule.forRoot(),
+
+    // Datepicker
+    NzDatePickerModule
   ],
   providers: [
     // auth services
