@@ -18,6 +18,7 @@ import { MainDashboardComponent } from './components/dashboard/main-dashboard/ma
 import { DeliveryPartnerSettingComponent } from './components/delivery-partner-setting/delivery-partner-setting.component';
 import { AllOrdersComponent } from './components/reports/all-orders/all-orders.component';
 import { TransactionHistoriesComponent } from './components/reports/transaction-histories/transaction-histories.component';
+import { OrdersComponent } from './components/orders/orders.component';
 
 // VB:REPLACE-END:ROUTER-IMPORTS
 
@@ -25,8 +26,7 @@ const routes: Routes = [
   {
     // VB:REPLACE-NEXT-LINE:ROUTER-REDIRECT
     path: '',
-    data: { title: 'Dashboards' },
-    component: MainDashboardComponent,
+    redirectTo:'dashboard',
     pathMatch: 'full',
   },
   {
@@ -59,6 +59,11 @@ const routes: Routes = [
         path: 'report/transaction-history',
         data: { title: 'Transaction History' },
         component: TransactionHistoriesComponent,
+      },
+      {
+        path: 'orders',
+        data: { title: 'Orders' },
+        component: OrdersComponent,
       }
       // VB:REPLACE-END:ROUTER-CONFIG
     ],

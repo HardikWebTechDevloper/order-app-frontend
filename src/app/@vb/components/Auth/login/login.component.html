@@ -12,12 +12,12 @@
           <input type="number" minlength="6" maxlength="6" nz-input formControlName="otp" placeholder="OTP" />
         </nz-form-control>
         <nz-form-control>
-          <a (click)="sendOTO()" class="pull-right">Resend OTP</a>
+          <a (click)="sendOTP()" class="pull-right">Resend OTP</a>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-control>
-          <button *ngIf="!isSentOTP" nz-button nzType="primary" (click)="sendOTO()" [nzLoading]="loading"
+          <button *ngIf="!isSentOTP" nz-button nzType="primary" (click)="sendOTP()" [nzLoading]="loading"
             class="text-center w-100">
             <strong>Generate OTP</strong>
           </button>

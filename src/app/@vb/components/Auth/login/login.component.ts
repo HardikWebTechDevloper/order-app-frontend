@@ -50,7 +50,7 @@ export class LoginComponent {
     return this.form.controls.otp;
   }
 
-  sendOTO(): void {
+  sendOTP(): void {
     this.phone.markAsDirty();
     this.phone.updateValueAndValidity();
 
@@ -62,11 +62,17 @@ export class LoginComponent {
 
     this.commonService.sendOTP({ phone }).pipe(first()).subscribe((response) => {
       if (response.status === true) {
-        // Add OTP Validation
-        this.form.controls['otp'].setValidators(Validators.required);
+        let role_name = response.user_role.role_name;
 
-        this.isSentOTP = true;
-        this.notification.success('Success!', response.message);
+        if (role_name == "Brand") {
+          // Add OTP Validation
+          this.form.controls['otp'].setValidators(Validators.required);
+
+          this.isSentOTP = true;
+          this.notification.success('Success!', response.message);
+        } else {
+          this.notification.warning('Error!', "You are not authorized to login as brand admin.");
+        }
       } else {
         this.notification.warning('Error!', response.message);
       }
@@ -88,14 +94,14 @@ export class LoginComponent {
 
     this.authService.login(phone, otp).pipe(first()).subscribe((data) => {
       if (data.status === true) {
-        this.notification.success('Logged In', 'You have successfully logged in!');
-        this.router.navigate(['/dashboard'])
+        this.notification.success('Access Granted!', 'You have successfully logged in!');
+        this.router.navigate(['/dashboard']);
       } else {
-        this.notification.warning('Auth Failed', data.message);
+        this.notification.warning('Authentication Failed', data.message);
       }
     }, (error) => {
       this.loading = false;
-      this.notification.warning('Auth Failed', null);
+      this.notification.warning('Authentication Failed', null);
     });
   }
 }

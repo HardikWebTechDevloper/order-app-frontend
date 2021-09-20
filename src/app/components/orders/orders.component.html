@@ -1,0 +1,74 @@
+<div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h3>Orders</h3>
+                        </div>
+                        <div class="col-md-3">
+                            <nz-range-picker [(ngModel)]="date" [nzDisabledDate]="disabledDate"
+                                [nzDisabledDate]="disabledDate" [nzFormat]="dateFormat" class="form-control"
+                                (ngModelChange)="onChangeDatePicker($event)"></nz-range-picker>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <nz-table #rowSelectionTable nzShowPagination nzShowSizeChanger [nzData]="listOfAllData"
+                        (nzCurrentPageDataChange)="currentPageDataChange($event)" class="vb__utils__table mb-4">
+                        <thead>
+                            <tr>
+                                <th>Order No</th>
+                                <th>Customer Name</th>
+                                <th>Order Date</th>
+                                <th>Amount (INR)</th>
+                                <th>City</th>
+                                <th>Pincode</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of rowSelectionTable.data">
+                                <td>{{ data.order_no }}</td>
+                                <td>{{ parseOrderDetails(data.order_details).first_name }} {{
+                                    parseOrderDetails(data.order_details).last_name }}</td>
+                                <td>{{ data.order_datetime | date: 'MMM d y h:mm a'}}</td>
+                                <td>{{ data.amount }}</td>
+                                <td>{{ parseOrderDetails(data.order_details).city }}</td>
+                                <td>{{ parseOrderDetails(data.order_details).zip }}</td>
+                                <td>
+                                    <span class="badge bg-dark text-white">{{data.order_status}}</span>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary"
+                                        (click)="showModal(data.order_details)" title="View Order">
+                                        <i class="fa fa-eye"></i></button>&nbsp;
+                                    <button class="btn btn-danger" title="Cancel Order"><i
+                                            class="fa fa-times"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </nz-table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Start Here, For Create Distributor -->
+<nz-modal [(nzVisible)]="isVisible" nzWidth="60%"  nzTitle="Order Details" (nzOnCancel)="handleCancel()">
+    <ng-container *nzModalContent>
+        <div>
+            <h1>Order Details</h1>
+        </div>
+    </ng-container>
+    <div *nzModalFooter>
+        <button class="btn btn-default btn-lg" (click)="handleCancel()">Cancel</button>&nbsp;
+        <button type="submit" (click)="onSubmit()" class="btn btn-primary btn-lg">
+            <i class="fa fa-times"></i>&nbsp;Cancel Order
+        </button>
+    </div>
+</nz-modal>
+<!-- End Here, For Create Distributor -->

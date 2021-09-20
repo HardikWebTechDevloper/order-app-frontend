@@ -33,11 +33,13 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
+// Functional Components
 import { ListDistributorsComponent } from './components/distributors/list-distributors/list-distributors.component';
 import { MainDashboardComponent } from './components/dashboard/main-dashboard/main-dashboard.component';
 import { DeliveryPartnerSettingComponent } from './components/delivery-partner-setting/delivery-partner-setting.component';
 import { AllOrdersComponent } from './components/reports/all-orders/all-orders.component';
 import { TransactionHistoriesComponent } from './components/reports/transaction-histories/transaction-histories.component';
+import { OrdersComponent } from './components/orders/orders.component';
 
 const LOCALE_PROVIDERS = [
   { provide: LOCALE_ID, useValue: 'en' },
@@ -52,7 +54,8 @@ registerLocaleData(localeEn, 'en')
     MainDashboardComponent,
     DeliveryPartnerSettingComponent,
     AllOrdersComponent,
-    TransactionHistoriesComponent
+    TransactionHistoriesComponent,
+    OrdersComponent
   ],
   imports: [
     HttpClientModule,

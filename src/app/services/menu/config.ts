@@ -13,6 +13,12 @@ export const getMenuData: any[] = [
     icon: 'fe fe-users'
   },
   {
+    title: 'Orders',
+    key: '64sqvb',
+    url: '/orders',
+    icon: 'fe fe-file'
+  },
+  {
     title: 'Report',
     key: '783vor',
     url: '/report/orders',
