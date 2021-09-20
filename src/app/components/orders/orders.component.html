@@ -42,8 +42,8 @@
                                     <span class="badge bg-dark text-white">{{data.order_status}}</span>
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary"
-                                        (click)="showModal(data.order_details)" title="View Order">
+                                    <button class="btn btn-primary" (click)="showModal(data.order_details)"
+                                        title="View Order">
                                         <i class="fa fa-eye"></i></button>&nbsp;
                                     <button class="btn btn-danger" title="Cancel Order"><i
                                             class="fa fa-times"></i></button>
@@ -58,15 +58,68 @@
 </div>
 
 <!-- Start Here, For Create Distributor -->
-<nz-modal [(nzVisible)]="isVisible" nzWidth="60%"  nzTitle="Order Details" (nzOnCancel)="handleCancel()">
+<nz-modal [(nzVisible)]="isVisible" nzWidth="60%" nzTitle="Order Details" (nzOnCancel)="handleCancel()">
     <ng-container *nzModalContent>
         <div>
-            <h1>Order Details</h1>
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <td width="60%">
+                            <h2>
+                                {{ orderDetail.shipping_address.first_name }}
+                                {{ orderDetail.shipping_address.last_name }}
+                            </h2>
+                        </td>
+                        <td width="40%">
+                            <p><i class="fa fa-address-card"></i>&nbsp;{{orderDetail.shipping_address.address1}},</p>
+                            <p>{{orderDetail.shipping_address.address2}},</p>
+                            <p>
+                                {{orderDetail.shipping_address.city}},
+                                {{ orderDetail.shipping_address.province }},
+                                {{orderDetail.shipping_address.country}} - {{orderDetail.shipping_address.zip}}
+                            </p>
+                            <p><i class="fa fa-phone"></i>&nbsp;{{orderDetail.shipping_address.phone}}</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Weight</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="orderDetail.line_items && orderDetail.line_items.length > 0">
+                    <tr *ngFor="let item of orderDetail.line_items;">
+                        <td>{{ item.title }}</td>
+                        <td>{{ item.grams / 1000 }} KG</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.price }}</td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="orderDetail.line_items && orderDetail.line_items.length > 0">
+                    <tr>
+                        <th colspan="3" class="text-right">
+                            Total
+                        </th>
+                        <td>{{ orderDetail.total_price }}</td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="orderDetail.line_items && orderDetail.line_items.length == 0">
+                    <tr>
+                        <td colspan="4" class="text-center">Items not found</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </ng-container>
     <div *nzModalFooter>
-        <button class="btn btn-default btn-lg" (click)="handleCancel()">Cancel</button>&nbsp;
-        <button type="submit" (click)="onSubmit()" class="btn btn-primary btn-lg">
+        <button class="btn btn-default btn-lg" (click)="handleCancel()">Close</button>&nbsp;
+        <button type="submit" class="btn btn-danger btn-lg">
             <i class="fa fa-times"></i>&nbsp;Cancel Order
         </button>
     </div>
