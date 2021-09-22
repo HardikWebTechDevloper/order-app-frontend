@@ -89,6 +89,8 @@ export class ListDistributorsComponent implements OnInit {
       user_id: [''],
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
+      phone: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       city_id: ['', [Validators.required]],
       state_id: ['', [Validators.required]],
       country_id: ['', [Validators.required]],
@@ -291,11 +293,17 @@ export class ListDistributorsComponent implements OnInit {
   }
 
   onCountrySelect(country_id: any): void {
+    this.editDistributorForm.controls['country_id'].setValue(country_id);
     this.getStatesList(country_id);
   }
 
   onStateSelect(state_id: any): void {
+    this.editDistributorForm.controls['state_id'].setValue(state_id);
     this.getCitiesList(state_id);
+  }
+
+  onCitySelect(city_id: any): void {
+    this.editDistributorForm.controls['city_id'].setValue(city_id);
   }
 
   showModal(): void {
@@ -317,6 +325,8 @@ export class ListDistributorsComponent implements OnInit {
           user_id: distributor._id,
           first_name: distributor.first_name,
           last_name: distributor.last_name,
+          phone: distributor.phone,
+          email: distributor.email,
           country_id: distributor.country_id,
           state_id: distributor.state_id,
           city_id: distributor.city_id,

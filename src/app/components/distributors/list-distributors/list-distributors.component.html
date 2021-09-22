@@ -204,12 +204,28 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="text" class="form-control" formControlName="phone" placeholder="Enter Phone"
+                        [ngClass]="{ 'is-invalid': submittedEditForm && e.phone.errors }">
+                    <div *ngIf="submittedEditForm && e.phone.errors" class="invalid-feedback">
+                        <div *ngIf="e.phone.errors.required">Last name is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" formControlName="email" placeholder="Enter Email"
+                        [ngClass]="{ 'is-invalid': submittedEditForm && e.email.errors }">
+                    <div *ngIf="submittedEditForm && e.email.errors" class="invalid-feedback">
+                        <div *ngIf="e.email.errors.required">Email is required</div>
+                        <div *ngIf="e.email.errors.email">Please eneter valid email address</div>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="country">Country</label>
-                    <select formControlName="country_id" class="form-control" #countrySelect
-                        (change)="onCountrySelect(countrySelect.value)"
-                        [ngClass]="{ 'is-invalid': submittedEditForm && e.country_id.errors }">
+                    <select class="form-control" #countrySelect (change)="onCountrySelect(countrySelect.value)">
                         <option value="">Select Country</option>
-                        <option *ngFor="let country of countries;" [value]="country._id">{{ country.country_name }}
+                        <option *ngFor="let country of countries;" [value]="country._id"
+                            [selected]="country._id == e.country_id.value">{{ country.country_name }}
                         </option>
                     </select>
                     <div *ngIf="submittedEditForm && e.country_id.errors" class="invalid-feedback">
@@ -218,12 +234,10 @@
                 </div>
                 <div class="form-group">
                     <label for="state">State</label>
-                    {{e.state_id.value}}
-                    <select formControlName="state_id" class="form-control" #stateSelect
-                        (change)="onStateSelect(stateSelect.value)"
-                        [ngClass]="{ 'is-invalid': submittedEditForm && e.state_id.errors }">
+                    <select class="form-control" #stateSelect (change)="onStateSelect(stateSelect.value)">
                         <option value="">Select State</option>
-                        <option *ngFor="let state of states;" [value]="state._id">{{ state.state_name }}
+                        <option *ngFor="let state of states;" [value]="state._id"
+                            [selected]="state._id == e.state_id.value">{{ state.state_name }}
                         </option>
                     </select>
                     <div *ngIf="submittedEditForm && e.state_id.errors" class="invalid-feedback">
@@ -232,11 +246,10 @@
                 </div>
                 <div class="form-group">
                     <label for="city">City</label>
-                    {{e.city_id.value}}
-                    <select formControlName="city_id" class="form-control"
-                        [ngClass]="{ 'is-invalid': submittedEditForm && e.city_id.errors }">
+                    <select class="form-control" #citySelect (change)="onCitySelect(citySelect.value)">
                         <option value="">Select City</option>
-                        <option *ngFor="let city of cities;" [value]="city._id">{{ city.city_name }}
+                        <option *ngFor="let city of cities;" [selected]="city._id == e.city_id.value"
+                            [value]="city._id">{{ city.city_name }}
                         </option>
                     </select>
                     <div *ngIf="submittedEditForm && e.city_id.errors" class="invalid-feedback">
@@ -278,9 +291,6 @@
                             <input type="text" class="form-control" [(ngModel)]="value.value" #name="ngModel"
                                 [ngModelOptions]="{standalone: true}">&nbsp;
                             <a (click)="removeEditedPincodevalue()"> <i class="fa fa-times icon-color"></i></a>
-                            <!-- <button class="btn btn-danger" (click)="removeEditedPincodevalue(i)">
-                                <i class="fa fa-times"></i>
-                            </button> -->
                         </div>
 
                         <div class="col-md-3 mt-2">
