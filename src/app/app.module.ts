@@ -41,6 +41,10 @@ import { AllOrdersComponent } from './components/reports/all-orders/all-orders.c
 import { TransactionHistoriesComponent } from './components/reports/transaction-histories/transaction-histories.component';
 import { OrdersComponent } from './components/orders/orders.component';
 
+// Auth Intercept
+import { AuthInterceptor } from './services/auth.interceptor'
+
+
 const LOCALE_PROVIDERS = [
   { provide: LOCALE_ID, useValue: 'en' },
   { provide: NZ_I18N, useValue: localeZorro },

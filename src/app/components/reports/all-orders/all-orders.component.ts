@@ -152,11 +152,11 @@ export class AllOrdersComponent implements OnInit {
     }, 1000)
   }
 
-  parseOrderDetails(column_name, data): void {
+  parseOrderDetails(data): void {
     let columnValue: any;
     if (data) {
       let order_details: any = JSON.parse(data);
-      columnValue = order_details[column_name];
+      columnValue = order_details.shipping_address;
     }
 
     return columnValue;
