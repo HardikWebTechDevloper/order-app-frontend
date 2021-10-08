@@ -102,6 +102,29 @@
                     </tr>
                 </tbody>
                 <tbody *ngIf="orderDetail.line_items && orderDetail.line_items.length > 0">
+                    <!-- Discount -->
+                    <tr>
+                        <th colspan="3" class="text-right">
+                            Discount
+                        </th>
+                        <td>
+                            {{ (orderDetail.current_total_discounts) ? orderDetail.current_total_discounts : '00.0' }}
+                        </td>
+                    </tr>
+                    <!-- Shipping Charge -->
+                    <tr>
+                        <th colspan="3" class="text-right">
+                            Shipping Charge
+                        </th>
+                        <td>
+                            {{ 
+                                (orderDetail.total_shipping_price_set && orderDetail.total_shipping_price_set.shop_money && orderDetail.total_shipping_price_set.shop_money.amount) 
+                                ? orderDetail.total_shipping_price_set.shop_money.amount 
+                                : '00.0' 
+                            }}
+                        </td>
+                    </tr>
+                    <!-- Total -->
                     <tr>
                         <th colspan="3" class="text-right">
                             Total
