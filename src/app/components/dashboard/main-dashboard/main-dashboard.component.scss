@@ -1,0 +1,25 @@
+.widget-flat {
+    position: relative;
+    overflow: hidden;
+}
+
+.float-end {
+    float: right!important;
+}
+
+.text-muted {
+    --bs-text-opacity: 1;
+    color: #98a6ad!important;
+}
+
+.widget-icon {
+    color: #727cf5;
+    font-size: 20px;
+    background-color: rgba(114,124,245,.25);
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 3px;
+    display: inline-block;
+}

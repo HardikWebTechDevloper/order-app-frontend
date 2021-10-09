@@ -12,7 +12,6 @@ import { LayoutAuthComponent } from 'src/app/layouts/Auth/auth.component'
 import { LayoutMainComponent } from 'src/app/layouts/Main/main.component'
 
 // pages
-import { DashboardAlphaComponent } from './pages/dashboard/alpha/alpha.component'
 import { ListDistributorsComponent } from './components/distributors/list-distributors/list-distributors.component';
 import { MainDashboardComponent } from './components/dashboard/main-dashboard/main-dashboard.component';
 import { DeliveryPartnerSettingComponent } from './components/delivery-partner-setting/delivery-partner-setting.component';
@@ -21,7 +20,6 @@ import { TransactionHistoriesComponent } from './components/reports/transaction-
 import { OrdersComponent } from './components/orders/orders.component';
 
 // VB:REPLACE-END:ROUTER-IMPORTS
-
 const routes: Routes = [
   {
     // VB:REPLACE-NEXT-LINE:ROUTER-REDIRECT
@@ -116,7 +114,6 @@ const routes: Routes = [
   ],
   declarations: [
     // VB:REPLACE-START:ROUTER-DECLARATIONS
-    DashboardAlphaComponent,
 
     // VB:REPLACE-END:ROUTER-DECLARATIONS
   ],

@@ -137,4 +137,12 @@ export class CommonService {
     }).pipe(map((data) => { return data; }));
   }
 
+  getBrandOrderReports(request) {
+    return this.http.post<any>(`${environment.API_URL}order/brand/report`, request, {
+      headers: {
+        Authorization: `Bearer ${this.token}`,
+      }
+    }).pipe(map((data) => { return data; }));
+  }
+
 }

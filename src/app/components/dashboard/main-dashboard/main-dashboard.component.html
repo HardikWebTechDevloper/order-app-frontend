@@ -1,18 +1,99 @@
 <div>
     <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h3>Dashboard</h3>
-                        </div>
-                    </div>
-                </div>
+        <div class="col-lg-4">
+            <div class="card widget-flat">
                 <div class="card-body">
-                    Dashboard Here
-                </div>
-            </div>
-        </div>
+                    <div class="float-end">
+                        &nbsp;
+                    </div>
+                    <h5 class="text-muted fw-normal mt-0" title="Total Orders">Total Orders</h5>
+                    <h1 class="mt-3 mb-3">{{ orderCounts.total_orders }}</h1>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col-->
+
+        <div class="col-lg-4">
+            <div class="card widget-flat">
+                <div class="card-body">
+                    <div class="float-end">
+                        &nbsp;
+                    </div>
+                    <h5 class="text-muted fw-normal mt-0" title="Pending Orders">Pending Orders</h5>
+                    <h1 class="mt-3 mb-3">{{ orderCounts.total_pending_orders }}</h1>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col-->
+
+        <div class="col-lg-4">
+            <div class="card widget-flat">
+                <div class="card-body">
+                    <div class="float-end">
+                        &nbsp;
+                    </div>
+                    <h5 class="text-muted fw-normal mt-0" title="Accepted Orders">Accepted Orders</h5>
+                    <h1 class="mt-3 mb-3">{{ orderCounts.total_accepted_orders }}</h1>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col-->
+
+        <div class="col-lg-4">
+            <div class="card widget-flat">
+                <div class="card-body">
+                    <div class="float-end">
+                        &nbsp;
+                    </div>
+                    <h5 class="text-muted fw-normal mt-0" title="Delivered Orders">Delivered Orders</h5>
+                    <h1 class="mt-3 mb-3">{{ orderCounts.total_delivered_orders }}</h1>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col-->
+
+        <div class="col-lg-4">
+            <div class="card widget-flat">
+                <div class="card-body">
+                    <div class="float-end">
+                        &nbsp;
+                    </div>
+                    <h5 class="text-muted fw-normal mt-0" title="Cancelled Orders">Cancelled Orders</h5>
+                    <h1 class="mt-3 mb-3">{{ orderCounts.total_rejected_orders }}</h1>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col-->
+
+        <div class="col-lg-4">
+            <div class="card widget-flat">
+                <div class="card-body">
+                    <div class="float-end">
+                        &nbsp;
+                    </div>
+                    <h5 class="text-muted fw-normal mt-0" title="Today's Orders">Today's Orders</h5>
+                    <h1 class="mt-3 mb-3">{{ orderCounts.todays_orders }}</h1>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col-->
+
+        <div class="col-lg-4">
+            <div class="card widget-flat">
+                <div class="card-body">
+                    <div class="float-end">
+                        &nbsp;
+                    </div>
+                    <h5 class="text-muted fw-normal mt-0" title="Today's Pending Orders">Today's Pending Orders</h5>
+                    <h1 class="mt-3 mb-3">{{ orderCounts.todays_pending_orders }}</h1>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col-->
+
+        <div class="col-lg-4">
+            <div class="card widget-flat">
+                <div class="card-body">
+                    <div class="float-end">
+                        &nbsp;
+                    </div>
+                    <h5 class="text-muted fw-normal mt-0" title="Today's Delivered Orders">Today's Delivered Orders</h5>
+                    <h1 class="mt-3 mb-3">{{ orderCounts.todays_delivered_orders }}</h1>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col-->
     </div>
 </div>
