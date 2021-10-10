@@ -75,12 +75,19 @@ export class ListDistributorsComponent implements OnInit {
     this.createDistributorForm = this.formBuilder.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
-      phone: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern("[0-9]{10}")]],
       email: ['', [Validators.required, Validators.email]],
       city_id: ['', [Validators.required]],
       state_id: ['', [Validators.required]],
       country_id: ['', [Validators.required]],
-      pin_code: ['', Validators.required],
+      pin_code: ['',
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(6),
+          Validators.pattern('[0-9]{6}')
+        ]
+      ],
       distributor_commision: ['', Validators.required],
       distributor_tax_details: ['', Validators.required]
     });
@@ -89,14 +96,22 @@ export class ListDistributorsComponent implements OnInit {
       user_id: [''],
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
-      phone: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern("[0-9]{10}")]],
       email: ['', [Validators.required, Validators.email]],
       city_id: ['', [Validators.required]],
       state_id: ['', [Validators.required]],
       country_id: ['', [Validators.required]],
-      pin_code: ['', Validators.required],
+      pin_code: ['',
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(6),
+          Validators.pattern('[0-9]{6}')
+        ]
+      ],
       distributor_commision: ['', Validators.required],
-      distributor_tax_details: ['', Validators.required]
+      distributor_tax_details: ['', Validators.required],
+      status: [false],
     });
   }
 
@@ -180,8 +195,6 @@ export class ListDistributorsComponent implements OnInit {
     }
 
     let requestObj: any = this.editDistributorForm.value;
-
-
     let covered_pincode = this.saved_covered_pincode_item.map(item => parseInt(item.value));
     covered_pincode = covered_pincode.filter((item, i, ar) => ar.indexOf(item) == i);
     requestObj.covered_pincode = covered_pincode;
@@ -315,6 +328,11 @@ export class ListDistributorsComponent implements OnInit {
     this.isVisible = false;
   }
 
+  updateStatus(event: any): void {
+    let status: boolean = event.target.checked;
+    this.editDistributorForm.get('status').patchValue(status);
+  }
+
   showEditModal(distribution_id: any): void {
     this.commonService.getUserByID({ user_id: distribution_id }).pipe(first()).subscribe((response) => {
       if (response.status === true && response.data) {
@@ -332,7 +350,8 @@ export class ListDistributorsComponent implements OnInit {
           city_id: distributor.city_id,
           pin_code: distributor.pin_code,
           distributor_commision: distributor.distributor_commision,
-          distributor_tax_details: distributor.distributor_tax_details
+          distributor_tax_details: distributor.distributor_tax_details,
+          status: distributor.status
         });
 
         this.getStatesList(distributor.country_id);

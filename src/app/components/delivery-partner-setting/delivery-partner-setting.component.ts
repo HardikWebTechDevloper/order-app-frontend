@@ -35,8 +35,10 @@ export class DeliveryPartnerSettingComponent implements OnInit {
     this.deliveryPartnerForm = this.formBuilder.group({
       brand_user_id: [this.currentUser._id],
       brand_id: [this.currentUser.brand_id],
-      partner_name: ['', Validators.required],
-      api_key: ['', Validators.required]
+      delivery_partner_name: ['', Validators.required],
+      host_name: ['', Validators.required],
+      client_id: ['', Validators.required],
+      client_password: ['', Validators.required],
     });
 
     this.getDeliveryPartner();
@@ -55,8 +57,10 @@ export class DeliveryPartnerSettingComponent implements OnInit {
         this.deliveryPartnerForm.setValue({
           brand_user_id: this.currentUser._id,
           brand_id: this.currentUser.brand_id,
-          partner_name: deliveryPartner.partner_name,
-          api_key: deliveryPartner.api_key
+          delivery_partner_name: deliveryPartner.delivery_partner_name,
+          host_name: deliveryPartner.host_name,
+          client_id: deliveryPartner.client_id,
+          client_password: deliveryPartner.client_password,
         });
       }
     });

@@ -10,20 +10,40 @@
                 <div class="card-body">
                     <form [formGroup]="deliveryPartnerForm">
                         <div class="form-group">
-                            <label for="partner_name">Partner Name</label>
-                            <input type="text" class="form-control" formControlName="partner_name"
+                            <label for="delivery_partner_name">Delivery Partner Name</label>
+                            <input type="text" class="form-control" formControlName="delivery_partner_name"
                                 placeholder="Enter Partner Name"
-                                [ngClass]="{ 'is-invalid': submitted && f.partner_name.errors }">
-                            <div *ngIf="submitted && f.partner_name.errors" class="invalid-feedback">
-                                <div *ngIf="f.partner_name.errors.required">Partner name is required</div>
+                                [ngClass]="{ 'is-invalid': submitted && f.delivery_partner_name.errors }">
+                            <div *ngIf="submitted && f.delivery_partner_name.errors" class="invalid-feedback">
+                                <div *ngIf="f.delivery_partner_name.errors.required">Delivery partner name is required
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="api_key">API Key</label>
-                            <input type="text" class="form-control" formControlName="api_key"
-                                placeholder="Enter API Key" [ngClass]="{ 'is-invalid': submitted && f.api_key.errors }">
-                            <div *ngIf="submitted && f.api_key.errors" class="invalid-feedback">
-                                <div *ngIf="f.api_key.errors.required">API key is required</div>
+                            <label for="host_name">Host Name</label>
+                            <input type="text" class="form-control" formControlName="host_name"
+                                placeholder="Enter Host Name"
+                                [ngClass]="{ 'is-invalid': submitted && f.host_name.errors }">
+                            <div *ngIf="submitted && f.host_name.errors" class="invalid-feedback">
+                                <div *ngIf="f.host_name.errors.required">Host name is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="client_id">Client Id</label>
+                            <input type="text" class="form-control" formControlName="client_id"
+                                placeholder="Enter Client Id"
+                                [ngClass]="{ 'is-invalid': submitted && f.client_id.errors }">
+                            <div *ngIf="submitted && f.client_id.errors" class="invalid-feedback">
+                                <div *ngIf="f.client_id.errors.required">Client id is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="client_password">Client Password</label>
+                            <input type="text" class="form-control" formControlName="client_password"
+                                placeholder="Enter Client Password"
+                                [ngClass]="{ 'is-invalid': submitted && f.client_password.errors }">
+                            <div *ngIf="submitted && f.client_password.errors" class="invalid-feedback">
+                                <div *ngIf="f.client_password.errors.required">Client password is required</div>
                             </div>
                         </div>
                         <div class="form-group">

@@ -36,8 +36,6 @@ export class MainDashboardComponent implements OnInit {
     this.commonService.getBrandOrderReports(this.orderRequest).pipe(first()).subscribe((response) => {
       if (response.status === true && response.results) {
         this.orderCounts = response.results;
-
-        console.log(this.orderCounts)
       } else {
         this.orderCounts = {};
         this.notification.warning('Error!', response.message);

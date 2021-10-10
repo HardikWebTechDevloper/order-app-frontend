@@ -7,7 +7,7 @@
                         &nbsp;
                     </div>
                     <h5 class="text-muted fw-normal mt-0" title="Total Orders">Total Orders</h5>
-                    <h1 class="mt-3 mb-3">{{ orderCounts.total_orders }}</h1>
+                    <h1 class="mt-3 mb-3">{{ (orderCounts.total_orders) ? orderCounts.total_orders : 0 }}</h1>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col-->
@@ -19,7 +19,7 @@
                         &nbsp;
                     </div>
                     <h5 class="text-muted fw-normal mt-0" title="Pending Orders">Pending Orders</h5>
-                    <h1 class="mt-3 mb-3">{{ orderCounts.total_pending_orders }}</h1>
+                    <h1 class="mt-3 mb-3">{{ (orderCounts.total_pending_orders) ? orderCounts.total_pending_orders : 0 }}</h1>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col-->
@@ -31,7 +31,7 @@
                         &nbsp;
                     </div>
                     <h5 class="text-muted fw-normal mt-0" title="Accepted Orders">Accepted Orders</h5>
-                    <h1 class="mt-3 mb-3">{{ orderCounts.total_accepted_orders }}</h1>
+                    <h1 class="mt-3 mb-3">{{ (orderCounts.total_accepted_orders) ? orderCounts.total_accepted_orders : 0 }}</h1>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col-->
@@ -43,7 +43,7 @@
                         &nbsp;
                     </div>
                     <h5 class="text-muted fw-normal mt-0" title="Delivered Orders">Delivered Orders</h5>
-                    <h1 class="mt-3 mb-3">{{ orderCounts.total_delivered_orders }}</h1>
+                    <h1 class="mt-3 mb-3">{{ (orderCounts.total_delivered_orders) ? orderCounts.total_delivered_orders : 0 }}</h1>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col-->
@@ -55,7 +55,7 @@
                         &nbsp;
                     </div>
                     <h5 class="text-muted fw-normal mt-0" title="Cancelled Orders">Cancelled Orders</h5>
-                    <h1 class="mt-3 mb-3">{{ orderCounts.total_rejected_orders }}</h1>
+                    <h1 class="mt-3 mb-3">{{ (orderCounts.total_rejected_orders) ? orderCounts.total_rejected_orders : 0 }}</h1>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col-->
@@ -67,7 +67,7 @@
                         &nbsp;
                     </div>
                     <h5 class="text-muted fw-normal mt-0" title="Today's Orders">Today's Orders</h5>
-                    <h1 class="mt-3 mb-3">{{ orderCounts.todays_orders }}</h1>
+                    <h1 class="mt-3 mb-3">{{ (orderCounts.todays_orders) ? orderCounts.todays_orders : 0 }}</h1>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col-->
@@ -79,7 +79,7 @@
                         &nbsp;
                     </div>
                     <h5 class="text-muted fw-normal mt-0" title="Today's Pending Orders">Today's Pending Orders</h5>
-                    <h1 class="mt-3 mb-3">{{ orderCounts.todays_pending_orders }}</h1>
+                    <h1 class="mt-3 mb-3">{{ (orderCounts.todays_pending_orders) ? orderCounts.todays_pending_orders : 0 }}</h1>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col-->
@@ -91,7 +91,7 @@
                         &nbsp;
                     </div>
                     <h5 class="text-muted fw-normal mt-0" title="Today's Delivered Orders">Today's Delivered Orders</h5>
-                    <h1 class="mt-3 mb-3">{{ orderCounts.todays_delivered_orders }}</h1>
+                    <h1 class="mt-3 mb-3">{{ (orderCounts.todays_delivered_orders) ? orderCounts.todays_delivered_orders : 0 }}</h1>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col-->
