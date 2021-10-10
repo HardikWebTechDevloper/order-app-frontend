@@ -4,12 +4,12 @@
     <form nz-form [nzLayout]="'vertical'" [formGroup]="form" role="form">
       <nz-form-item>
         <nz-form-control nzErrorTip="Please input your phone!">
-          <input type="number" nz-input formControlName="phone" placeholder="Phone Number" />
+          <input type="text" nz-input formControlName="phone" placeholder="Phone Number" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item [hidden]="!isSentOTP">
         <nz-form-control nzErrorTip="Please input your OTP!">
-          <input type="number" minlength="6" maxlength="6" nz-input formControlName="otp" placeholder="OTP" />
+          <input type="text" nz-input formControlName="otp" placeholder="OTP" />
         </nz-form-control>
         <nz-form-control>
           <a (click)="sendOTP()" class="pull-right">Resend OTP</a>

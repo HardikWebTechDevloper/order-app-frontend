@@ -169,7 +169,7 @@
 
                     <div class="row">
                         <div class="col-md-3 mt-2 inline-box" *ngFor="let value of covered_pincode_item; let i = index">
-                            <input type="text" class="form-control" [(ngModel)]="value.value" #name="ngModel"
+                            <input type="text" class="form-control" minLength="6" maxLength="6" [(ngModel)]="value.value" #name="ngModel"
                                 [ngModelOptions]="{standalone: true}">&nbsp;
                             <a (click)="removevalue(i)"> <i class="fa fa-times icon-color"></i></a>
                         </div>
@@ -305,7 +305,7 @@
                     <div class="row">
                         <div class="col-md-3 mt-2 inline-box"
                             *ngFor="let value of saved_covered_pincode_item; let i = index">
-                            <input type="text" class="form-control" [(ngModel)]="value.value" #name="ngModel"
+                            <input type="text" class="form-control" minLength="6" maxLength="6" [(ngModel)]="value.value" #name="ngModel"
                                 [ngModelOptions]="{standalone: true}">&nbsp;
                             <a (click)="removeEditedPincodevalue()"> <i class="fa fa-times icon-color"></i></a>
                         </div>

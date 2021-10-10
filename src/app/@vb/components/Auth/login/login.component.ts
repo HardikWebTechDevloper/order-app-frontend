@@ -30,7 +30,7 @@ export class LoginComponent {
     private commonService: CommonService
   ) {
     this.form = fb.group({
-      phone: ['', [Validators.required]],
+      phone: ['', [Validators.required, Validators.pattern("[0-9]{10}")]],
       otp: ['']
     });
 
@@ -66,7 +66,7 @@ export class LoginComponent {
 
         if (role_name == "Brand") {
           // Add OTP Validation
-          this.form.controls['otp'].setValidators(Validators.required);
+          this.form.controls['otp'].setValidators([Validators.required,  Validators.pattern('[0-9]{6}')]);
 
           this.isSentOTP = true;
           this.notification.success('Success!', response.message);
