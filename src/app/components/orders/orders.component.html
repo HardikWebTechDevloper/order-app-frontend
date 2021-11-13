@@ -132,10 +132,11 @@
                         </th>
                         <td>{{ orderDetail.total_price }}</td>
                     </tr>
+                    
                     <!-- Customer Signature -->
-                    <tr *ngIf="currentOrder.customer_signature">
+                    <tr *ngIf="currentOrder.customer_signature_attachment">
                         <td colspan="4">
-                            <img [src]="currentOrder.customer_signature" alt="Signature" class="customer-sign-img">
+                            <img [src]="currentOrder.customer_signature_attachment" alt="Signature" class="customer-sign-img">
                         </td>
                     </tr>
                 </tbody>
