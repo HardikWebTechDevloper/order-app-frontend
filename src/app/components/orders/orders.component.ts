@@ -27,6 +27,7 @@ export class OrdersComponent implements OnInit {
   currentUser: any;
   orderRequest: any = {};
   orderDetail: any;
+  currentOrder: any;
 
   // Datepicker
   dateFormat = 'yyyy/MM/dd';
@@ -121,8 +122,9 @@ export class OrdersComponent implements OnInit {
     this.getAllOrders();
   }
 
-  showModal(order_details: any): void {
+  showModal(order: any, order_details: any): void {
     order_details = JSON.parse(order_details);
+    this.currentOrder = order;
 
     this.orderDetail = order_details;
     this.isVisible = true;

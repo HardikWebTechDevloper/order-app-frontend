@@ -42,7 +42,7 @@
                                     <span class="badge bg-dark text-white">{{data.order_status}}</span>
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary" (click)="showModal(data.order_details)"
+                                    <button class="btn btn-primary" (click)="showModal(data, data.order_details)"
                                         title="View Order">
                                         <i class="fa fa-eye"></i></button>&nbsp;
                                     <button class="btn btn-danger" title="Cancel Order"><i
@@ -117,10 +117,11 @@
                             Shipping Charge
                         </th>
                         <td>
-                            {{ 
-                                (orderDetail.total_shipping_price_set && orderDetail.total_shipping_price_set.shop_money && orderDetail.total_shipping_price_set.shop_money.amount) 
-                                ? orderDetail.total_shipping_price_set.shop_money.amount 
-                                : '00.0' 
+                            {{
+                            (orderDetail.total_shipping_price_set && orderDetail.total_shipping_price_set.shop_money &&
+                            orderDetail.total_shipping_price_set.shop_money.amount)
+                            ? orderDetail.total_shipping_price_set.shop_money.amount
+                            : '00.0'
                             }}
                         </td>
                     </tr>
@@ -130,6 +131,12 @@
                             Total
                         </th>
                         <td>{{ orderDetail.total_price }}</td>
+                    </tr>
+                    <!-- Customer Signature -->
+                    <tr *ngIf="currentOrder.customer_signature">
+                        <td colspan="4">
+                            <img [src]="currentOrder.customer_signature" alt="Signature" class="customer-sign-img">
+                        </td>
                     </tr>
                 </tbody>
                 <tbody *ngIf="orderDetail.line_items && orderDetail.line_items.length == 0">
